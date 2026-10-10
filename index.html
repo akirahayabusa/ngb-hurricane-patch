@@ -141,6 +141,7 @@ tbody th{color:var(--ash);font-weight:500;width:22%;white-space:nowrap}
 .dots{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:8px;vertical-align:1px}
 .dots span{font-size:10.5px;padding:0 5px;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);white-space:nowrap}
 .note{font-size:13px;color:var(--warn);margin-top:2px}
+.note.ok{color:#6fbf8a}
 .empty{color:var(--ash);padding:30px 0}
 
 /* ---------- md dialog ---------- */
@@ -353,7 +354,7 @@ const CMP = {
 const RELEASES = [
  {date:"2026-10-10", latest:true, flags:["x360"], v:{A:"va-zh-x1",B:"vb-zh-new-x1",B2:"vb-zh-origin-x1",C:"vb-jp-new-x1",C2:"vb-jp-origin-x1"},
   title:{zh:"x1 · Xbox 360 修复版",en:"x1 · Xbox 360 fixes",ja:"x1 · Xbox 360 修正版"},
-  lead:{zh:"修复 x 版在 Xbox 360 上的两个问题，功能与 x 版相同，存档通用。",en:"Fixes two Xbox 360 problems in x. Features are the same as x; saves are compatible.",ja:"x の Xbox 360 での問題を 2 つ修正。機能は x と同じで、セーブデータも共通です。"},
+  lead:{zh:"修复 x 版在 Xbox 360 上的两个问题（均已在 360 实机确认），功能与 x 版相同，存档通用。",en:"Fixes two Xbox 360 problems in x (both confirmed on a real 360). Features are the same as x; saves are compatible.",ja:"x の Xbox 360 での問題を 2 つ修正（いずれも 360 実機で確認済み）。機能は x と同じで、セーブデータも共通です。"},
   items:[
    {k:"360",l:ALL,t:{zh:"<b>修复 360 上控制器设置页的文字叠在一起</b>：x 版在 360 上各行文字和横条都叠在第一行（模拟器上正常）。改用 360 上验证过的写法，360 已实测修复。",
      en:"<b>Fixed the Controller Settings page drawing every row on top of each other on the Xbox 360</b> (fine in emulators). Rewritten the way already proven on the 360; confirmed fixed on a real 360.",
@@ -361,7 +362,7 @@ const RELEASES = [
    {k:"360",l:HUR,t:{zh:"<b>修复 360 上进入 SFC 三部曲后整机死机</b>：x 版选一作后没有声音、直接黑屏，西瓜键菜单也出不来（6d 和第 8 版是响一声音乐后黑屏、可正常退出；三部曲本身在 360 上不能运行）。经多轮 360 对照测试定位到补丁数据的存放位置，已按结果调整。",
      en:"<b>Fixed the Xbox 360 freezing after picking a game in the SNES trilogy</b>: in x the screen went black with no sound and the Guide menu would not open (in 6d and v8 a jingle plays, then a black screen you can exit; the trilogy itself does not run on the 360). Several rounds of 360 A/B tests traced it to where the patch data sits, and the layout was changed accordingly.",
      ja:"<b>Xbox 360 で SFC 三部作を選ぶと本体がフリーズする問題を修正</b>：x では音が鳴らずに暗転し、ガイドメニューも開けませんでした（6d・第 8 版は音楽が一瞬鳴って暗転、終了は可能。三部作自体は 360 では動きません）。360 での比較テストでパッチデータの配置が原因と特定し、配置を変更しました。"},
-    note:{zh:"修复版本身尚未在 360 实机上确认，如仍有问题请反馈。",en:"The fixed build itself has not been confirmed on a real 360 yet; please report any problem.",ja:"修正版そのものはまだ 360 実機で確認していません。問題があればお知らせください。"}},
+    note:{zh:"360 实机已确认修复：选一作后不再死机，西瓜键可正常退出（三部曲本身在 360 上仍不能运行）。",en:"Confirmed on a real 360: picking a game no longer freezes the console and the Guide button exits normally (the trilogy itself still does not run on the 360).",ja:"360 実機で修正を確認：作品を選んでもフリーズせず、ガイドボタンで正常に終了できます（三部作自体は 360 では動きません）。"},ok:true},
    {k:"fix",l:ALL,t:{zh:"弓箭准星的代码改回 6d 起在 360 上验证过的写法，只多准星开关判断。",en:"The bow crosshair code is back to the form proven on the 360 since 6d, plus only the on/off check.",ja:"弓の照準のコードを 6d から 360 で確認済みの書き方に戻しました（オン／オフ判定のみ追加）。"}},
    {k:"fix",l:HUR,t:{zh:"交差之法 / 安宁之腕轮自动补齐的代码同样改回 6d 写法，只多模式判断。",en:"The automatic Intercept / Armlet of Tranquility top-up is likewise back to the 6d form, plus only the mode check.",ja:"交差の法・安らぎの腕輪の自動補充のコードも 6d の書き方に戻しました（モード判定のみ追加）。"}}
   ]},
@@ -603,9 +604,9 @@ const FEAT = [
        "初期設定は現在の一般的なゲームと同じ向き。コントローラー設定の Camera Control が客観・主観の両方に効き、Reverse で両方の上下左右が反転（客観は 2005 年オリジナルの操作感）。"),
    base:1, h:1},
   {n:T("弓箭准星","Bow crosshair","弓の照準"),
-   d:T("架弓瞄准时屏幕正中显示白色细十字（箭的命中点）；控制器设置「弓箭准星」可关闭，默认开启。",
-       "A thin white cross at the arrow's impact point while aiming; can be turned off with Bow Crosshair (default On).",
-       "弓を構えると画面中央に白い細十字（着弾点）。Bow Crosshair でオフ可（初期値 On）。"),
+   d:T("架弓瞄准时屏幕正中显示白色细十字（箭的命中点），所有弓都有（已实测）；控制器设置「弓箭准星」可关闭，默认开启。",
+       "A thin white cross at the arrow's impact point while aiming, with every bow (tested); can be turned off with Bow Crosshair (default On).",
+       "弓を構えると画面中央に白い細十字（着弾点）。すべての弓で表示（確認済み）。Bow Crosshair でオフ可（初期値 On）。"),
    base:1, h:1}
  ]},
  {g:T("玩法改动（只在飓风版）","Gameplay changes (Hurricane only)","ゲームプレイの変更（ハリケーン版のみ）"), rows:[
@@ -662,10 +663,10 @@ const FEAT = [
  ]},
  {g:T("兼容与存档","Compatibility and saves","互換性・セーブ"), rows:[
   {n:T("Xbox 360 兼容修复","Xbox 360 fixes","Xbox 360 向けの修正"),
-   d:T("所有版本：第三人称镜头锁定敌人转动、控制器设置页叠字（均经 360 玩家实测）。中英版：情报 → 章节页崩溃。飓风版：过警告画面即关机（360 实测可进游戏）、进入 SFC 三部曲后整机死机（修复版尚未在 360 实机确认）。",
-       "All editions: camera locking onto enemies and overlapping Controller Settings rows (both confirmed by 360 players). Chinese builds: Info → Chapter page crash. Hurricane: power-off after the warning screen (confirmed to boot on a 360) and the freeze when entering the SNES trilogy (fix not yet confirmed on a real 360).",
-       "全版：客観カメラが敵をロックして回る問題、コントローラー設定の重なり（いずれも 360 で確認済み）。中英版：情報 → 章画面のクラッシュ。ハリケーン版：警告画面後の電源断（360 で起動確認済み）、SFC 三部作選択時のフリーズ（修正版は 360 実機で未確認）。"),
-   base:1, h:T("✓（SFC 修复待确认）","✓ (SNES fix unconfirmed)","✓（SFC の修正は未確認）")},
+   d:T("所有版本：第三人称镜头锁定敌人转动、控制器设置页叠字（均经 360 玩家实测）。中英版：情报 → 章节页崩溃。飓风版：过警告画面即关机（360 实测可进游戏）、进入 SFC 三部曲后整机死机（均经 360 实机确认）。",
+       "All editions: camera locking onto enemies and overlapping Controller Settings rows (both confirmed by 360 players). Chinese builds: Info → Chapter page crash. Hurricane: power-off after the warning screen (confirmed to boot on a 360) and the freeze when entering the SNES trilogy (both confirmed on a real 360).",
+       "全版：客観カメラが敵をロックして回る問題、コントローラー設定の重なり（いずれも 360 で確認済み）。中英版：情報 → 章画面のクラッシュ。ハリケーン版：警告画面後の電源断（360 で起動確認済み）、SFC 三部作選択時のフリーズ（いずれも 360 実機で確認済み）。"),
+   base:1, h:1},
   {n:T("存档通用","Shared saves","セーブデータ共通"),
    d:T("同一语言的版本之间存档通用（如飓风new ↔ 飓风origin 可以随时换着玩）。升级只需用原版镜像重新打新补丁，首次启动会重新安装缓存。",
        "Saves are shared between builds of the same language (switch freely between Hurricane new and origin). To update, patch the original image again; the first boot reinstalls the cache.",
@@ -674,9 +675,9 @@ const FEAT = [
  ]}
 ];
 const ISSUES = {
- zh:["主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","主要在 xemu 上测试；Xbox 360 由玩家实测了部分功能。","准星只在普通弓上实测，强化后的弓、水中射击尚未实测。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
- en:["With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mainly tested in xemu; Xbox 360 players have tested part of the features.","The crosshair is tested with the normal bow only; upgraded bows and underwater shooting are untested.","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
- ja:["本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","主に xemu で確認。Xbox 360 は一部の機能をプレイヤーが確認済み。","照準は通常の弓でのみ確認。強化後の弓・水中射撃は未確認。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
+ zh:["主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","主要在 xemu 上测试；Xbox 360 由玩家实测了部分功能。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
+ en:["With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mainly tested in xemu; Xbox 360 players have tested part of the features.","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
+ ja:["本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","主に xemu で確認。Xbox 360 は一部の機能をプレイヤーが確認済み。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
 };
 
 /* ===== state ===== */
@@ -761,7 +762,7 @@ function render(){
       <div class="rhead"><h3>${tx(r.title)}</h3><div class="flags">${flags}</div></div>
       ${vers.length ? `<div class="vers">${vers.map(k => `<span class="ver" style="--c:${ED_COLOR[LINE[k].ed]}" title="${lineLabel(k,U)}">${r.v[k]}<small>${lineLabel(k,U)}</small></span>`).join("")}</div>` : ""}
       ${r.lead ? `<p class="lead">${tx(r.lead)}</p>` : ""}
-      <ul class="items">${items.map(it => `<li><span class="kind k-${it.k}">${U.kind[it.k]}</span><div class="body">${tx(it.t)}<span class="dots">${itemTags(lines(it),U).map(([s,c]) => `<span style="--c:${c}">${s}</span>`).join("")}</span>${it.note ? `<div class="note">⚠ ${tx(it.note)}</div>` : ""}</div></li>`).join("")}</ul>
+      <ul class="items">${items.map(it => `<li><span class="kind k-${it.k}">${U.kind[it.k]}</span><div class="body">${tx(it.t)}<span class="dots">${itemTags(lines(it),U).map(([s,c]) => `<span style="--c:${c}">${s}</span>`).join("")}</span>${it.note ? `<div class="note${it.ok?" ok":""}">${it.ok?"✓":"⚠"} ${tx(it.note)}</div>` : ""}</div></li>`).join("")}</ul>
     </article>`;
   }
   $("#tl").innerHTML = html || `<p class="empty">${U.empty}</p>`;
@@ -801,7 +802,7 @@ function toMarkdown(){
     for (const it of items){
       const tags = itemTags(lines(it),U).map(t => t[0]).join(", ");
       L.push(`- **[${U.kind[it.k]}]** ${strip(tx(it.t))}（${tags}）`);
-      if (it.note) L.push(`  - ⚠ ${strip(tx(it.note))}`);
+      if (it.note) L.push(`  - ${it.ok?"✓":"⚠"} ${strip(tx(it.note))}`);
     }
     L.push("");
   }
