@@ -655,11 +655,6 @@ const FEAT = [
        "Main-menu entry (Chinese “SFC忍者龙剑传”, English “SNES NINJA GAIDEN”, Japanese build “SFC NINJA RYUKENDEN”); pick I, II or III directly, passwords supported; quit from pause or hold START+BACK ~3 s to return, B for the main menu. Chinese/Japanese mode runs the Japanese release, English mode the US TRILOGY. The trilogy itself does not run on the Xbox 360.",
        "メインメニューの項目（中国語「SFC忍者龙剑传」、英語「SNES NINJA GAIDEN」、日英版日本語モード「SFC NINJA RYUKENDEN」）から一・二・三作を直接選択、パスワード対応。ポーズの終了か START+BACK 長押し約 3 秒で選択画面へ、B でメインメニューへ。中国語／日本語モードは日本版、英語モードは北米版。三部作自体は Xbox 360 では動きません。"),
    base:0, h:1},
-  {n:T("读取其他主机 / 模拟器的存档","Saves from other consoles / emulators","他の本体／エミュレータのセーブ"),
-   d:T("只去掉本机签名比对，文件大小、解密解压、游戏签名等检查全部保留，损坏的存档仍会被拒绝；写出的存档仍带本机签名。",
-       "Only the per-console signature check is removed; size, decryption and game-signature checks stay, so damaged saves are still rejected. Saves written are still signed.",
-       "本体署名の照合のみ外し、サイズ・復号・ゲーム署名のチェックは維持（壊れたデータは読み込まない）。書き出すデータは従来どおり署名付き。"),
-   base:0, h:1}
  ]},
  {g:T("兼容与存档","Compatibility and saves","互換性・セーブ"), rows:[
   {n:T("Xbox 360 兼容修复","Xbox 360 fixes","Xbox 360 向けの修正"),
@@ -667,6 +662,11 @@ const FEAT = [
        "All editions: camera locking onto enemies and overlapping Controller Settings rows (both confirmed by 360 players). Chinese builds: Info → Chapter page crash. Hurricane: power-off after the warning screen (confirmed to boot on a 360) and the freeze when entering the SNES trilogy (both confirmed on a real 360).",
        "全版：客観カメラが敵をロックして回る問題、コントローラー設定の重なり（いずれも 360 で確認済み）。中英版：情報 → 章画面のクラッシュ。ハリケーン版：警告画面後の電源断（360 で起動確認済み）、SFC 三部作選択時のフリーズ（いずれも 360 実機で確認済み）。"),
    base:1, h:1},
+  {n:T("移除存档的本机签名校验","Per-console save signature check removed","セーブの本体署名チェックを削除"),
+   d:T("可以读取其他主机 / 模拟器（换了主机或 EEPROM）的存档和系统存档。只去掉本机签名比对，文件大小、解密解压、游戏签名等检查全部保留，损坏的存档仍会被拒绝；写出的存档仍带本机签名。",
+       "Saves and system data from other consoles / emulators (another console or EEPROM) now load. Only the per-console signature check is removed; size, decryption and game-signature checks stay, so damaged saves are still rejected. Saves written are still signed.",
+       "他の本体／エミュレータ（本体や EEPROM の変更）のセーブデータ・システムデータを読み込めます。本体署名の照合のみ外し、サイズ・復号・ゲーム署名のチェックは維持（壊れたデータは読み込まない）。書き出すデータは従来どおり署名付き。"),
+   base:0, h:1},
   {n:T("存档通用","Shared saves","セーブデータ共通"),
    d:T("同一语言的版本之间存档通用（如飓风new ↔ 飓风origin 可以随时换着玩）。升级只需用原版镜像重新打新补丁，首次启动会重新安装缓存。",
        "Saves are shared between builds of the same language (switch freely between Hurricane new and origin). To update, patch the original image again; the first boot reinstalls the cache.",
