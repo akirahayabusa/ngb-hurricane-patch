@@ -815,7 +815,7 @@ function saveMd(){
   try {
     const blob = new Blob(["﻿"+$("#mdText").value], {type:"text/markdown;charset=utf-8"});
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = `NGB_changelog_${st.lang}.md`;
+    a.href = URL.createObjectURL(blob); a.download = `ngb-hurricane-patch_${st.lang}.md`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
     $("#mdMsg").textContent = U.saved;
