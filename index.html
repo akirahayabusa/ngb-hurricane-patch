@@ -164,7 +164,6 @@ footer{border-top:1px solid var(--ink-3);padding-block:26px 40px;color:var(--ash
 footer .wrap{display:grid;gap:8px}
 footer b,.qq{color:var(--bone)}
 .qq{font-family:var(--f-mono);user-select:all}
-.priv{color:var(--warn)}
 
 @media (max-width:600px){
   .hero .art{opacity:.45;-webkit-mask-image:none;mask-image:none;background-size:cover}
@@ -293,7 +292,6 @@ const UI = {
   saveFail:"浏览器拦截了下载，请复制全文另存为 .md", printFail:"当前环境不支持打印，请用浏览器直接打开本 HTML 文件后再导出 PDF",
   credit:"程序 & 翻译：<b>b站 哈雅布撒</b>　反馈 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本汉化为爱好者非盈利作品，仅供已拥有正版游戏的玩家学习交流，请勿用于商业用途。",
-  priv:"飓风版含 2004 年版《忍者龙剑传》收录的 SFC 三部曲程序，仅限私下分享，请勿公开传播。",
   base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中文版，jp = 日文版。",
   art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
@@ -313,7 +311,6 @@ const UI = {
   saveFail:"The browser blocked the download. Copy the text and save it as .md.", printFail:"Printing is not available here. Open this HTML file directly in a browser to export a PDF.",
   credit:"Code &amp; translation: <b>哈雅布撒 (bilibili)</b>　Feedback QQ: <span class=\"qq\">2682557218</span>",
   legal:"Original game ©TECMO / Team NINJA. This is a non-commercial fan work for owners of the original game.",
-  priv:"The Hurricane editions contain the SNES trilogy program from the 2004 NINJA GAIDEN. Share privately only; do not redistribute publicly.",
   base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese build, jp = Japanese build.",
   art:"Background: the game's original key art (Ryu) and title-screen texture.", latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
@@ -333,7 +330,6 @@ const UI = {
   saveFail:"ダウンロードがブロックされました。全文をコピーして .md として保存してください。", printFail:"この環境では印刷できません。HTML ファイルをブラウザで直接開いて PDF を出力してください。",
   credit:"プログラム・翻訳：<b>哈雅布撒（bilibili）</b>　連絡先 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本パッチは非営利のファン作品です。正規のゲームをお持ちの方のみご利用ください。",
-  priv:"ハリケーン版には 2004 年版『NINJA GAIDEN』収録の SFC 三部作のプログラムが含まれます。個人間での共有に限り、公開の場での再配布はご遠慮ください。",
   base:"xemu・初代 Xbox 本体・Xbox 360（下位互換）で動作確認済み。すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中国語版、jp = 日本語版。",
   art:"背景：ゲームのオリジナルキービジュアル（リュウ）とタイトル画面のテクスチャ。", latestOf:"最新", vs:"項目" }
 };
@@ -793,7 +789,7 @@ function render(){
   const dlRows = dlOrder(U);
   $("#dlName").textContent = dlRows.find(d => d.key === "baidu").name;
   $("#dlJpName").textContent = dlRows.find(d => d.key === "drive").name;
-  $("#foot").innerHTML = dlRows.map(d => `<div class="dlfoot"><b>${d.name}</b> · ${d.label}${d.code ? ` · ${U.dlCode} <b>${d.code}</b>` : ""} · <a href="${d.url}" target="_blank" rel="noopener">${d.url}</a></div>`).join("") + `<div>${U.credit}</div><div>${U.legal}</div><div class="priv">${U.priv}</div><div>${U.base}</div><div>${U.art}</div>`;
+  $("#foot").innerHTML = dlRows.map(d => `<div class="dlfoot"><b>${d.name}</b> · ${d.label}${d.code ? ` · ${U.dlCode} <b>${d.code}</b>` : ""} · <a href="${d.url}" target="_blank" rel="noopener">${d.url}</a></div>`).join("") + `<div>${U.credit}</div><div>${U.legal}</div><div>${U.base}</div><div>${U.art}</div>`;
 }
 
 /* ===== markdown export (current language + filter) ===== */
@@ -831,7 +827,7 @@ function toMarkdown(){
     }
     L.push("");
   }
-  L.push("---", "", strip(U.credit), "", U.legal, "", U.priv, "", U.base, "");
+  L.push("---", "", strip(U.credit), "", U.legal, "", U.base, "");
   return L.join("\n");
 }
 function openMd(){ $("#mdText").value = toMarkdown(); $("#mdMsg").textContent = ""; $("#modal").hidden = false; $("#mdSave").focus(); }
