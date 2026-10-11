@@ -287,7 +287,7 @@ const UI = {
   credit:"程序 & 翻译：<b>b站 哈雅布撒</b>　反馈 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本汉化为爱好者非盈利作品，仅供已拥有正版游戏的玩家学习交流，请勿用于商业用途。",
   priv:"飓风版含 2004 年版《忍者龙剑传》收录的 SFC 三部曲程序，仅限私下分享，请勿公开传播。",
-  base:"所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中英，jp = 日英。",
+  base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中英，jp = 日英。",
   art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
@@ -307,7 +307,7 @@ const UI = {
   credit:"Code &amp; translation: <b>哈雅布撒 (bilibili)</b>　Feedback QQ: <span class=\"qq\">2682557218</span>",
   legal:"Original game ©TECMO / Team NINJA. This is a non-commercial fan work for owners of the original game.",
   priv:"The Hurricane editions contain the SNES trilogy program from the 2004 NINJA GAIDEN. Share privately only; do not redistribute publicly.",
-  base:"Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese/English, jp = Japanese/English.",
+  base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese/English, jp = Japanese/English.",
   art:"Background: the game's original key art (Ryu) and title-screen texture.", latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
   sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-10 の x1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
@@ -327,7 +327,7 @@ const UI = {
   credit:"プログラム・翻訳：<b>哈雅布撒（bilibili）</b>　連絡先 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本パッチは非営利のファン作品です。正規のゲームをお持ちの方のみご利用ください。",
   priv:"ハリケーン版には 2004 年版『NINJA GAIDEN』収録の SFC 三部作のプログラムが含まれます。個人間での共有に限り、公開の場での再配布はご遠慮ください。",
-  base:"すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中英、jp = 日英。",
+  base:"xemu・初代 Xbox 本体・Xbox 360（下位互換）で動作確認済み。すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中英、jp = 日英。",
   art:"背景：ゲームのオリジナルキービジュアル（リュウ）とタイトル画面のテクスチャ。", latestOf:"最新", vs:"項目" }
 };
 
@@ -683,9 +683,9 @@ const FEAT = [
  ]}
 ];
 const ISSUES = {
- zh:["主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","主要在 xemu 上测试；Xbox 360 已由玩家实测，初代 Xbox 主机尚无实测反馈。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
- en:["With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mainly tested in xemu; tested on the Xbox 360 by players; no reports yet from an original Xbox.","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
- ja:["本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","主に xemu で確認。Xbox 360 はプレイヤーが実機で確認済み、初代 Xbox 本体での報告はまだありません。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
+ zh:["主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
+ en:["With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
+ ja:["本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
 };
 
 /* ===== state ===== */
