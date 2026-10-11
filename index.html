@@ -293,7 +293,7 @@ const UI = {
   credit:"程序 & 翻译：<b>b站 哈雅布撒</b>　反馈 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本汉化为爱好者非盈利作品，仅供已拥有正版游戏的玩家学习交流，请勿用于商业用途。",
   base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中文版，jp = 日文版。",
-  art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
+  latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
   dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese builds", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
@@ -312,7 +312,7 @@ const UI = {
   credit:"Code &amp; translation: <b>哈雅布撒 (bilibili)</b>　Feedback QQ: <span class=\"qq\">2682557218</span>",
   legal:"Original game ©TECMO / Team NINJA. This is a non-commercial fan work for owners of the original game.",
   base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese build, jp = Japanese build.",
-  art:"Background: the game's original key art (Ryu) and title-screen texture.", latestOf:"latest", vs:"" },
+  latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
   sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-10 の x1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
   dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日本語版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
@@ -331,7 +331,7 @@ const UI = {
   credit:"プログラム・翻訳：<b>哈雅布撒（bilibili）</b>　連絡先 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本パッチは非営利のファン作品です。正規のゲームをお持ちの方のみご利用ください。",
   base:"xemu・初代 Xbox 本体・Xbox 360（下位互換）で動作確認済み。すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中国語版、jp = 日本語版。",
-  art:"背景：ゲームのオリジナルキービジュアル（リュウ）とタイトル画面のテクスチャ。", latestOf:"最新", vs:"項目" }
+  latestOf:"最新", vs:"項目" }
 };
 
 const CMP = {
@@ -789,7 +789,7 @@ function render(){
   const dlRows = dlOrder(U);
   $("#dlName").textContent = dlRows.find(d => d.key === "baidu").name;
   $("#dlJpName").textContent = dlRows.find(d => d.key === "drive").name;
-  $("#foot").innerHTML = dlRows.map(d => `<div class="dlfoot"><b>${d.name}</b> · ${d.label}${d.code ? ` · ${U.dlCode} <b>${d.code}</b>` : ""} · <a href="${d.url}" target="_blank" rel="noopener">${d.url}</a></div>`).join("") + `<div>${U.credit}</div><div>${U.legal}</div><div>${U.base}</div><div>${U.art}</div>`;
+  $("#foot").innerHTML = dlRows.map(d => `<div class="dlfoot"><b>${d.name}</b> · ${d.label}${d.code ? ` · ${U.dlCode} <b>${d.code}</b>` : ""} · <a href="${d.url}" target="_blank" rel="noopener">${d.url}</a></div>`).join("") + `<div>${U.credit}</div><div>${U.legal}</div><div>${U.base}</div>`;
 }
 
 /* ===== markdown export (current language + filter) ===== */
