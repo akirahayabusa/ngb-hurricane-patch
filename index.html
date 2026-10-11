@@ -13,7 +13,7 @@
 :root{
   --ink:#0b0a0d; --ink-2:rgba(22,20,26,.92); --ink-3:#2a2630;
   --bone:#ece7dd; --ash:#a39c92;
-  --blood:#cf3640; --gold:#cfa650; --steel:#9fb3c8;
+  --blood:#cf3640; --azure:#2f6fd1; --gold:#cfa650; --steel:#9fb3c8;
   --ed-base:#9fb3c8; --ed-new:#e0484f; --ed-origin:#e8a04a;
   --warn:#e6b450;
   --f-display:"Noto Serif SC","Noto Serif JP","Source Han Serif SC","Songti SC",serif;
@@ -51,9 +51,10 @@ button{font:inherit;color:inherit}
 .dl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:24px}
 .dl a.go{display:inline-flex;align-items:center;gap:12px;background:var(--blood);color:#fff;text-decoration:none;font-family:var(--f-display);font-weight:900;font-size:20px;
   padding:12px 26px 12px 20px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);box-shadow:0 0 0 1px rgba(255,255,255,.08) inset;transition:filter .15s,transform .15s}
-.dl a.go.alt{background:transparent;color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;font-size:17px}
-.dl.ja-first a.go.alt{order:-1;background:var(--blood);color:#fff;box-shadow:none;font-size:20px}
-.dl.ja-first a.go:not(.alt){background:transparent;color:var(--gold);box-shadow:0 0 0 2px var(--gold) inset;font-size:17px}
+/* primary download = crimson, secondary = same shape in azure; zh: Baidu first, en/ja: Google Drive first */
+.dl a.go.alt{background:var(--azure)}
+.dl.drive-first a.go.alt{order:-1;background:var(--blood)}
+.dl.drive-first a.go:not(.alt){background:var(--azure)}
 .dl a.go:hover{filter:brightness(1.15);transform:translateY(-1px)}
 .dl a.go svg{width:22px;height:22px;flex:none}
 .dl a.go small{display:block;font-family:var(--f-body);font-weight:500;font-size:12px;opacity:.85;letter-spacing:.04em}
@@ -291,7 +292,7 @@ const UI = {
   art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
-  dl:"Download the latest", dlSub:"Baidu Netdisk · all editions in one bundle", dlJp:"Japanese build", dlJpSub:"Google Drive · ja/en editions", dlJpFoot:"Japanese build (Google Drive): ", dlCode:"Code", dlCopy:"Copy link + code", dlFoot:"Download (Baidu Netdisk, extraction code mjta): ",
+  dl:"All editions", dlSub:"Baidu Netdisk · bundle incl. the Chinese builds", dlJp:"Download the latest", dlJpSub:"Google Drive · Japanese/English editions", dlJpFoot:"Japanese build (Google Drive): ", dlCode:"Code", dlCopy:"Copy link + code", dlFoot:"Download (Baidu Netdisk, extraction code mjta): ",
   featTitle:"Current features (x1)", featSub:"Everything in the latest builds as of 2026-10-10: va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
   pdf:"Export PDF", md:"Export Markdown", edTitle:"Three editions", cmpTitle:"Hurricane origin vs. Hurricane new",
   ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin"}, lang:{zh:"zh/en",jp:"ja/en"},
@@ -776,7 +777,7 @@ function render(){
   $("#tl").innerHTML = html || `<p class="empty">${U.empty}</p>`;
   $("#count").textContent = U.count(vis.length, n);
   $("#dlLink").href = DL_URL; $("#dlJp").href = DL_JP;
-  document.querySelector(".dl").classList.toggle("ja-first", st.lang === "ja");
+  document.querySelector(".dl").classList.toggle("drive-first", st.lang !== "zh");
   $("#foot").innerHTML = `<div class="dlfoot">${U.dlFoot}<a href="${DL_URL}" target="_blank" rel="noopener">${DL_URL}</a></div><div class="dlfoot">${U.dlJpFoot}<a href="${DL_JP}" target="_blank" rel="noopener">${DL_JP}</a></div><div>${U.credit}</div><div>${U.legal}</div><div class="priv">${U.priv}</div><div>${U.base}</div><div>${U.art}</div>`;
 }
 
