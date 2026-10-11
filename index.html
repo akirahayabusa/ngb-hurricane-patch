@@ -43,6 +43,11 @@ button{font:inherit;color:inherit}
 .seg{display:inline-flex;border:1px solid var(--ink-3);background:rgba(11,10,13,.6)}
 .seg button{background:none;border:0;padding:4px 11px;font-size:13px;cursor:pointer;color:var(--ash)}
 .seg button[aria-pressed="true"]{background:var(--blood);color:#fff}
+.plbl{font-size:12px;color:var(--ash);align-self:center;margin-right:-2px}
+.langnote{margin:12px 0 0;font-size:13.5px;color:#cfc8bd;border-left:3px solid var(--gold);padding:6px 12px;background:rgba(207,166,80,.06);max-width:80ch}
+.lgb{font-family:var(--f-body);font-weight:700;font-size:10.5px;padding:0 6px;margin-left:6px;border-radius:2px;vertical-align:1px}
+.lgb.zh{background:var(--bone);color:var(--ink)}
+.lgb.jp{border:1px solid var(--bone);color:var(--bone)}
 .btn{background:rgba(11,10,13,.6);border:1px solid var(--ink-3);padding:4px 12px;font-size:13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
 .btn:hover{border-color:var(--gold);color:var(--gold)}
 .hero h1{font-family:var(--f-display);font-weight:900;font-size:clamp(32px,5.6vw,56px);line-height:1.18;margin:0 0 .35em;text-wrap:balance;letter-spacing:.02em;max-width:15em;text-shadow:0 2px 20px #000}
@@ -191,7 +196,7 @@ footer b,.qq{color:var(--bone)}
     <div class="topbar">
       <div class="eyebrow" data-i="eyebrow"></div>
       <div class="tools">
-        <div class="seg" id="langs" role="group" aria-label="Language">
+        <span class="plbl" data-i="pageLang"></span><div class="seg" id="langs" role="group" aria-label="Page language">
           <button type="button" data-lang="zh">中文</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja">日本語</button>
         </div>
         <button class="btn" type="button" id="pdf" data-i="pdf"></button>
@@ -221,6 +226,7 @@ footer b,.qq{color:var(--bone)}
   <section class="wrap">
     <h2 class="h2" data-i="edTitle"></h2>
     <div class="eds" id="eds"></div>
+    <p class="langnote" data-i="langNote"></p>
   </section>
 
   <section class="wrap">
@@ -261,7 +267,7 @@ footer b,.qq{color:var(--bone)}
 </div>
 
 <script>
-/* ===== lines: A = 基本版 中英 · B = 飓风new 中英 · B2 = 飓风origin 中英 · C = 飓风new 日英 · C2 = 飓风origin 日英 ===== */
+/* ===== lines: A = 基本版 中文版 · B = 飓风new 中文版 · B2 = 飓风origin 中文版 · C = 飓风new 日文版 · C2 = 飓风origin 日文版 ===== */
 const ORDER = ["A","B","B2","C","C2"];
 const LINE = {A:{ed:"base",lang:"zh"},B:{ed:"new",lang:"zh"},B2:{ed:"origin",lang:"zh"},C:{ed:"new",lang:"jp"},C2:{ed:"origin",lang:"jp"}};
 const LATEST = {A:"va-zh-x1",B:"vb-zh-new-x1",B2:"vb-zh-origin-x1",C:"vb-jp-new-x1",C2:"vb-jp-origin-x1"};
@@ -272,35 +278,35 @@ const ALL="A B B2 C C2", ZH="A B B2", HUR="B B2 C C2", BZH="B B2";
 const UI = {
  zh:{ eyebrow:"NINJA GAIDEN BLACK · 更新日志", h1:"忍者龙剑传 <em>黑之章</em><br>汉化与飓风补丁 更新日志",
   sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-10 的 x1，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
-  dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日英版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
-  featTitle:"当前功能一览（x1）", featSub:"截至 2026-10-10 最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 的全部功能。✓ 有，— 无；日英版与中英版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
+  dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日文版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
+  featTitle:"当前功能一览（x1）", featSub:"截至 2026-10-10 最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
   pdf:"导出 PDF", md:"导出 Markdown", edTitle:"三个版本", cmpTitle:"飓风origin 与 飓风new 有什么区别",
-  ed:{base:"基本版",new:"飓风new",origin:"飓风origin"}, lang:{zh:"中英",jp:"日英"},
-  edTag:{base:"中英 · 原汁原味黑之章",new:"中英 / 日英 · 黑之章交差之法",origin:"中英 / 日英 · 一代交差之法"},
+  ed:{base:"基本版",new:"飓风new",origin:"飓风origin"}, lang:{zh:"中文版",jp:"日文版"},
+  edTag:{base:"中文版 · 原汁原味黑之章",new:"中文版 / 日文版 · 黑之章交差之法",origin:"中文版 / 日文版 · 一代交差之法"},
   edDesc:{base:"只做汉化 + 修复视角 + 射箭准星，不含任何玩法改动。",
-   new:"汉化 + 全部玩法改动：复活交差之法、安宁之腕轮、妖刀鬼彻扣血、SFC 忍者龙剑传三部曲、全隐藏服装、二周目等。交差之法为黑之章版。日英版不汉化，只加玩法改动。",
+   new:"汉化 + 全部玩法改动：复活交差之法、安宁之腕轮、妖刀鬼彻扣血、SFC 忍者龙剑传三部曲、全隐藏服装、二周目等。交差之法为黑之章版。日文版不汉化，只加玩法改动。",
    origin:"与飓风new 内容完全相同，只有交差之法换成 2004 年初代《忍者龙剑传》飓风包的版本。"},
-  fEd:"版本", fLang:"语言", all:"全部", allLang:"全部语言", hur:"飓风",
-  count:(r,i)=>`${r} 个版本 · ${i} 项改动`, empty:"所选组合没有对应的版本（基本版只有中英）。",
+  fEd:"版本", fLang:"游戏语言", pageLang:"网页语言", langNote:"中文版：游戏内文字为简体中文（选项里可切换英文）。日文版：游戏内文字保持日文原样（可切换英文），不含汉化，只有飓风补丁的玩法改动。版本号里 zh = 中文版，jp = 日文版。", all:"全部", allLang:"全部语言", hur:"飓风",
+  count:(r,i)=>`${r} 个版本 · ${i} 项改动`, empty:"所选组合没有对应的版本（基本版只有中文版）。",
   kind:{fix:"修复",new:"新增",zh:"汉化","360":"360",misc:"调整"}, flag:{latest:"最新",x360:"XBOX 360",new:"里程碑",wd:"已撤回"},
   mdTitle:"导出 Markdown", mdSave:"保存 .md 文件", mdCopy:"复制全文", close:"关闭", copied:"已复制", saved:"已开始下载",
   saveFail:"浏览器拦截了下载，请复制全文另存为 .md", printFail:"当前环境不支持打印，请用浏览器直接打开本 HTML 文件后再导出 PDF",
   credit:"程序 & 翻译：<b>b站 哈雅布撒</b>　反馈 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本汉化为爱好者非盈利作品，仅供已拥有正版游戏的玩家学习交流，请勿用于商业用途。",
   priv:"飓风版含 2004 年版《忍者龙剑传》收录的 SFC 三部曲程序，仅限私下分享，请勿公开传播。",
-  base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中英，jp = 日英。",
+  base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中文版，jp = 日文版。",
   art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
-  dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese/English editions", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
+  dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese builds", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
   featTitle:"Current features (x1)", featSub:"Everything in the latest builds as of 2026-10-10: va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
   pdf:"Export PDF", md:"Export Markdown", edTitle:"Three editions", cmpTitle:"Hurricane origin vs. Hurricane new",
-  ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin"}, lang:{zh:"zh/en",jp:"ja/en"},
-  edTag:{base:"Chinese/English · pure Black",new:"Chinese or Japanese · Black's Intercept",origin:"Chinese or Japanese · 2004 Intercept"},
+  ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin"}, lang:{zh:"Chinese build",jp:"Japanese build"},
+  edTag:{base:"Chinese build · pure Black",new:"Chinese or Japanese build · Black's Intercept",origin:"Chinese or Japanese build · 2004 Intercept"},
   edDesc:{base:"Translation, camera fixes and a bow crosshair only. No gameplay changes.",
    new:"Translation plus every gameplay change: working Intercept, Armlet of Tranquility, the Kitetsu health drain, the SNES Ninja Gaiden trilogy, all hidden costumes, New Game+ and more. Intercept is Black's version. The Japanese build keeps the original Japanese text and adds only the gameplay changes.",
    origin:"Identical to Hurricane new except Intercept, which is replaced by the version from the 2004 NINJA GAIDEN Hurricane Pack."},
-  fEd:"Edition", fLang:"Language", all:"All", allLang:"All languages", hur:"Hurricane",
+  fEd:"Edition", fLang:"Game language", pageLang:"Page language", langNote:"Chinese build: in-game text in Simplified Chinese (English selectable in Options). Japanese build: original Japanese in-game text (English selectable), no translation, only the Hurricane gameplay changes. In version names zh = Chinese build, jp = Japanese build.", all:"All", allLang:"All languages", hur:"Hurricane",
   count:(r,i)=>`${r} releases · ${i} changes`, empty:"No release matches this combination (Basic exists in Chinese only).",
   kind:{fix:"Fix",new:"New",zh:"Text","360":"360",misc:"Tweak"}, flag:{latest:"Latest",x360:"XBOX 360",new:"Milestone",wd:"Withdrawn"},
   mdTitle:"Export Markdown", mdSave:"Save .md file", mdCopy:"Copy all", close:"Close", copied:"Copied", saved:"Download started",
@@ -308,27 +314,27 @@ const UI = {
   credit:"Code &amp; translation: <b>哈雅布撒 (bilibili)</b>　Feedback QQ: <span class=\"qq\">2682557218</span>",
   legal:"Original game ©TECMO / Team NINJA. This is a non-commercial fan work for owners of the original game.",
   priv:"The Hurricane editions contain the SNES trilogy program from the 2004 NINJA GAIDEN. Share privately only; do not redistribute publicly.",
-  base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese/English, jp = Japanese/English.",
+  base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese build, jp = Japanese build.",
   art:"Background: the game's original key art (Ryu) and title-screen texture.", latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
   sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-10 の x1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
-  dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日英版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"現在の機能一覧（x1）", featSub:"2026-10-10 時点の最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 の全機能。✓ あり、— なし。日英版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
+  dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日本語版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
+  featTitle:"現在の機能一覧（x1）", featSub:"2026-10-10 時点の最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
   pdf:"PDF を出力", md:"Markdown を出力", edTitle:"3 つの版", cmpTitle:"ハリケーン origin と ハリケーン new の違い",
-  ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin"}, lang:{zh:"中英",jp:"日英"},
-  edTag:{base:"中国語・英語 · 『Black』そのまま",new:"中英 / 日英 · 『Black』の交差の法",origin:"中英 / 日英 · 初代の交差の法"},
+  ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin"}, lang:{zh:"中国語版",jp:"日本語版"},
+  edTag:{base:"中国語版 · 『Black』そのまま",new:"中国語版 / 日本語版 · 『Black』の交差の法",origin:"中国語版 / 日本語版 · 初代の交差の法"},
   edDesc:{base:"中国語化・カメラ修正・弓の照準のみ。ゲームプレイの変更はありません。",
-   new:"中国語化＋すべての機能追加：交差の法の復活、安らぎの腕輪、妖刀鬼徹の体力減少、SFC『忍者龍剣伝』三部作、隠し衣装、二周目など。交差の法は『Black』版。日英版は翻訳せず、機能追加のみ。",
+   new:"中国語化＋すべての機能追加：交差の法の復活、安らぎの腕輪、妖刀鬼徹の体力減少、SFC『忍者龍剣伝』三部作、隠し衣装、二周目など。交差の法は『Black』版。日本語版は翻訳せず、機能追加のみ。",
    origin:"ハリケーン new と同じ内容で、交差の法だけを 2004 年版『NINJA GAIDEN』ハリケーンパックのものに置き換えた版。"},
-  fEd:"版", fLang:"言語", all:"すべて", allLang:"全言語", hur:"ハリケーン",
-  count:(r,i)=>`${r} バージョン · ${i} 件の変更`, empty:"この組み合わせのバージョンはありません（基本版は中英のみ）。",
+  fEd:"版", fLang:"ゲームの言語", pageLang:"ページの言語", langNote:"中国語版：ゲーム内の文字は簡体字中国語（オプションで英語に切替可）。日本語版：ゲーム内の文字は日本語のまま（英語に切替可）、翻訳なしでハリケーンパッチのゲームプレイ変更のみ。バージョン名の zh = 中国語版、jp = 日本語版。", all:"すべて", allLang:"全言語", hur:"ハリケーン",
+  count:(r,i)=>`${r} バージョン · ${i} 件の変更`, empty:"この組み合わせのバージョンはありません（基本版は中国語版のみ）。",
   kind:{fix:"修正",new:"追加",zh:"翻訳","360":"360",misc:"調整"}, flag:{latest:"最新",x360:"XBOX 360",new:"節目",wd:"取り下げ"},
   mdTitle:"Markdown を出力", mdSave:".md を保存", mdCopy:"全文コピー", close:"閉じる", copied:"コピーしました", saved:"ダウンロードを開始しました",
   saveFail:"ダウンロードがブロックされました。全文をコピーして .md として保存してください。", printFail:"この環境では印刷できません。HTML ファイルをブラウザで直接開いて PDF を出力してください。",
   credit:"プログラム・翻訳：<b>哈雅布撒（bilibili）</b>　連絡先 QQ：<span class=\"qq\">2682557218</span>",
   legal:"原作 ©TECMO / Team NINJA。本パッチは非営利のファン作品です。正規のゲームをお持ちの方のみご利用ください。",
   priv:"ハリケーン版には 2004 年版『NINJA GAIDEN』収録の SFC 三部作のプログラムが含まれます。個人間での共有に限り、公開の場での再配布はご遠慮ください。",
-  base:"xemu・初代 Xbox 本体・Xbox 360（下位互換）で動作確認済み。すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中英、jp = 日英。",
+  base:"xemu・初代 Xbox 本体・Xbox 360（下位互換）で動作確認済み。すべて同じ北米版オリジナルイメージ（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）から作成。同じ言語の版同士はセーブデータ共通。バージョン名：va = 基本版、vb = ハリケーン版、zh = 中国語版、jp = 日本語版。",
   art:"背景：ゲームのオリジナルキービジュアル（リュウ）とタイトル画面のテクスチャ。", latestOf:"最新", vs:"項目" }
 };
 
@@ -384,9 +390,9 @@ const RELEASES = [
    {k:"new",l:ALL,t:{zh:"<b>弓箭准星</b>开关：关闭后架弓瞄准时不显示准星，默认开启。两项都在「水中操作」之前，「恢复默认设置」恢复为「正常」「开」，旧系统存档沿用原来的镜头选择。",
      en:"<b>Bow Crosshair</b> On/Off (default On). Both rows sit above Controls While in Water; Default Settings resets them to Normal / On; older system data keeps its camera choice.",
      ja:"<b>Bow Crosshair</b>（On／Off、初期値 On）。2 項目とも「Controls While in Water」の前。Default Settings で Normal／On に戻り、以前のシステムデータはカメラ設定をそのまま引き継ぎます。"}},
-   {k:"misc",l:"C C2",t:{zh:"日英版两项的名字为英文 Camera Control / Bow Crosshair（与日版其他设置项一致），说明文为日文。",en:"In the Japanese build the two rows are named in English like the other settings, with Japanese descriptions.",ja:"日英版では他の項目と同じく項目名は英語、説明文は日本語です。"}},
+   {k:"misc",l:"C C2",t:{zh:"日文版两项的名字为英文 Camera Control / Bow Crosshair（与日版其他设置项一致），说明文为日文。",en:"In the Japanese build the two rows are named in English like the other settings, with Japanese descriptions.",ja:"日本語版では他の項目と同じく項目名は英語、説明文は日本語です。"}},
    {k:"zh",l:BZH,t:{zh:"主菜单 SFC 三部曲入口的英文名改为 <b>SNES NINJA GAIDEN</b>（中文模式仍为“SFC忍者龙剑传”）。",en:"The main-menu trilogy entry is named <b>SNES NINJA GAIDEN</b> in English mode (“SFC忍者龙剑传” in Chinese).",ja:"メインメニューの三部作の英語名を <b>SNES NINJA GAIDEN</b> に（中国語モードは「SFC忍者龙剑传」）。"}},
-   {k:"zh",l:"C C2",t:{zh:"日英版入口名：日文模式 <b>SFC NINJA RYUKENDEN</b>，英文模式 <b>SNES NINJA GAIDEN</b>。",en:"Japanese build entry name: <b>SFC NINJA RYUKENDEN</b> in Japanese mode, <b>SNES NINJA GAIDEN</b> in English mode.",ja:"日英版の項目名：日本語モード <b>SFC NINJA RYUKENDEN</b>、英語モード <b>SNES NINJA GAIDEN</b>。"}},
+   {k:"zh",l:"C C2",t:{zh:"日文版入口名：日文模式 <b>SFC NINJA RYUKENDEN</b>，英文模式 <b>SNES NINJA GAIDEN</b>。",en:"Japanese build entry name: <b>SFC NINJA RYUKENDEN</b> in Japanese mode, <b>SNES NINJA GAIDEN</b> in English mode.",ja:"日本語版の項目名：日本語モード <b>SFC NINJA RYUKENDEN</b>、英語モード <b>SNES NINJA GAIDEN</b>。"}},
    {k:"360",l:ALL,t:{zh:"新增代码按 Xbox 360 兼容规则逐条复查。",en:"All new code reviewed against the Xbox 360 compatibility rules.",ja:"追加コードを Xbox 360 互換ルールで再点検。"}}
   ]},
  {date:"2026-10-09", flags:["new"], v:{B:"vb-zh-new-8",B2:"vb-zh-origin-8",C:"vb-jp-new-8",C2:"vb-jp-origin-8"},
@@ -506,9 +512,9 @@ const RELEASES = [
    {k:"fix",l:"B C",t:{zh:"触发时机统一到“真正开始游戏之前”，剧情和任务都只判断一次；喊声完整播完再开始读取。",en:"The check happens once, right before the game starts, in story and missions; loading waits for the shout to finish.",ja:"判定はゲーム開始直前の 1 回に統一（ストーリー・ミッション共通）。掛け声を最後まで再生してから読み込み。"}}
   ]},
  {date:"2026-09-28", flags:["new"], v:{A:"v1.1b",B:"v1.3.6",C:"v1.3.6-jp"},
-  title:{zh:"v1.3.6 / v1.1b · 署名优化，日英版首发",en:"v1.3.6 / v1.1b · Credits; Japanese build debuts",ja:"v1.3.6 / v1.1b · クレジット、日英版初公開"},
+  title:{zh:"v1.3.6 / v1.1b · 署名优化，日文版首发",en:"v1.3.6 / v1.1b · Credits; Japanese build debuts",ja:"v1.3.6 / v1.1b · クレジット、日本語版初公開"},
   items:[
-   {k:"new",l:"C",t:{zh:"<b>日英版首发</b>：不汉化，游戏内日文文字与图片保持原样，只加入中文版的全部玩法改进。",en:"<b>Japanese build debuts</b>: original Japanese text and images, with all the gameplay changes of the Chinese build.",ja:"<b>日英版を初公開</b>：日本語の文字・画像はオリジナルのまま、中国語版の機能追加のみを収録。"}},
+   {k:"new",l:"C",t:{zh:"<b>日文版首发</b>：不汉化，游戏内日文文字与图片保持原样，只加入中文版的全部玩法改进。",en:"<b>Japanese build debuts</b>: original Japanese text and images, with all the gameplay changes of the Chinese build.",ja:"<b>日本語版を初公開</b>：日本語の文字・画像はオリジナルのまま、中国語版の機能追加のみを収録。"}},
    {k:"misc",l:"A B",t:{zh:"标题画面署名改为「程序&翻译：B站 Logo 哈雅布撒　2026年9月25日」；健康 / 版权警告末尾追加非盈利声明与反馈 QQ。",en:"New title-screen credit with the bilibili logo; a non-commercial notice and feedback QQ added after the health warning.",ja:"タイトル画面のクレジットを bilibili ロゴ付きに変更、警告画面に非営利の注記と連絡先を追加。"}},
    {k:"zh",l:"A",t:{zh:"基本版同步译名修正：隼之里、吊舱（见 v1.3.4）。",en:"Basic gets the v1.3.4 name fixes (Hayabusa Village, gondola).",ja:"基本版にも v1.3.4 の訳語修正（隼之里・吊舱）を反映。"}}
   ]},
@@ -578,25 +584,25 @@ const FEAT = [
    d:T("过场字幕、事件对话、结局；道具、秘传书、忍法、武器、商店、存读档与确认提示；日记书信等文书译成现代白话；主菜单、难度、选项、按键提示。以日文原文为底本。",
        "Cutscene subtitles, event dialogue, ending; items, scrolls, ninpo, weapons, shop, save and confirm prompts; diaries and letters in modern prose; main menu, difficulty, options, button prompts. Translated from the Japanese text.",
        "ムービー字幕・イベント会話・エンディング、アイテム・秘伝書・忍法・武器・店・セーブや確認の表示、日記や手紙（現代語訳）、メインメニュー・難易度・オプション・ボタン表示。日本語原文から翻訳。"),
-   base:1, h:T("中英 ✓ ／ 日英：日文原样","zh/en ✓ / ja/en: original Japanese","中英 ✓ ／ 日英：日本語のまま")},
+   base:1, h:T("中文版 ✓ ／ 日文版：日文原样","Chinese ✓ / Japanese build: original Japanese","中国語版 ✓ ／ 日本語版：日本語のまま")},
   {n:T("图片里的文字","Text in images","画像内の文字"),
    d:T("16 章章节标题图、「任务完成」等书法字、全部 50 张地图地名、选项分类标签、暂停菜单六块标签牌、村正商店招牌、通关结算画面；标题 Logo 右下角加中文副标题「忍者龙剑传 黑之章」。",
        "16 chapter title cards, calligraphy such as “Mission Complete”, place names on all 50 maps, option tabs, the six pause-menu plates, Muramasa's shop sign, the results screens; a Chinese subtitle under the title logo.",
        "16 章の章タイトル、「任務完了」などの書道文字、全 50 枚の地図の地名、オプションのタブ、ポーズメニューの 6 枚のプレート、ムラマサの店の看板、クリア画面。タイトルロゴに中国語の副題。"),
-   base:1, h:T("中英 ✓ ／ 日英：原样","zh/en ✓ / ja/en: original","中英 ✓ ／ 日英：オリジナル")},
+   base:1, h:T("中文版 ✓ ／ 日文版：原样","Chinese ✓ / Japanese build: original","中国語版 ✓ ／ 日本語版：オリジナル")},
   {n:T("界面补译","Leftover English translated","残っていた英語の翻訳"),
    d:T("存读档界面、“说明”底栏、连击、调查、继续、载入中、任务模式各项与任务名（含“永恒传说”）、27 个旗帜国名等。为避免 360 崩溃，情报页的 Chapter / PHASE / Rachel / Total Karma 与存读档标题、Successive Play 保留英文。",
        "Save/load screens, Information bars, combo, interact, proceed, loading, mission-mode labels and names (incl. ETERNAL LEGEND), 27 flag names. Info-page Chapter / PHASE / Rachel / Total Karma (Xbox 360 crash), the SAVE/LOAD GAME titles and Successive Play stay English.",
        "セーブ／ロード画面、説明欄、コンボ、調べる、続ける、ロード中、ミッション関連（ETERNAL LEGEND を含む）、国旗 27 種など。情報画面の Chapter / PHASE / Rachel / Total Karma（360 のクラッシュ回避）、SAVE/LOAD GAME の見出し、Successive Play は英語のまま。"),
-   base:1, h:T("中英 ✓ ／ 日英：—","zh/en ✓ / ja/en: —","中英 ✓ ／ 日英：—")},
+   base:1, h:T("中文版 ✓ ／ 日文版：—","Chinese ✓ / Japanese build: —","中国語版 ✓ ／ 日本語版：—")},
   {n:T("开机默认中文与中国国旗","Chinese and the Chinese flag by default","起動時から中国語・中国国旗"),
    d:T("原版每次开机按主机语言把文字设回英文、国旗设回空白。","The original resets text to English and the flag to blank at every boot.","オリジナルは起動のたびに英語・国旗なしに戻ります。"),
-   base:1, h:T("中英 ✓ ／ 日英：—","zh/en ✓ / ja/en: —","中英 ✓ ／ 日英：—")},
+   base:1, h:T("中文版 ✓ ／ 日文版：—","Chinese ✓ / Japanese build: —","中国語版 ✓ ／ 日本語版：—")},
   {n:T("字体","Fonts","フォント"),
    d:T("对白和菜单用思源黑体粗体，16 像素小字清楚；标题、章节名、地图、书法字等美术字用鼎猎宋刻体。",
        "Dialogue and menus in Source Han Sans Bold, sharp at 16 px; titles, chapter names, maps and calligraphy in a Song-style display face.",
        "会話・メニューは源ノ角ゴシック Bold（16px でも鮮明）、タイトル・章名・地図・書道文字は宋朝体風の書体。"),
-   base:1, h:T("中英 ✓ ／ 日英：原版字体","zh/en ✓ / ja/en: original fonts","中英 ✓ ／ 日英：オリジナル")},
+   base:1, h:T("中文版 ✓ ／ 日文版：原版字体","Chinese ✓ / Japanese build: original fonts","中国語版 ✓ ／ 日本語版：オリジナル")},
   {n:T("标题画面标识与署名","Title screen marks and credits","タイトル画面の表示とクレジット"),
    d:T("版权条下方署名「程序&翻译：B站 Logo 哈雅布撒」；健康警告末尾追加非盈利声明与反馈 QQ。飓风版右下角另有 Hurricane new / Hurricane origin 与银白 CZ 标志。",
        "Credit under the copyright line with the bilibili logo; a non-commercial notice and QQ after the health warning. Hurricane editions also show Hurricane new / Hurricane origin and a silver CZ mark.",
@@ -660,16 +666,16 @@ const FEAT = [
        "ストーリーのみ。エンディング後にクリアデータ（Successive Play）を保存、ロードで第 1 章から黄金のスカラベ（ムラマサに渡した分も含め最大 50）を持ち越して新しい周回。最初のセーブ前に倒れても GAME OVER のみで、クリアデータは元どおり。"),
    base:0, h:1},
   {n:T("SFC 忍者龙剑传三部曲","SNES Ninja Gaiden trilogy","SFC『忍者龍剣伝』三部作"),
-   d:T("主菜单入口（中文“SFC忍者龙剑传”、英文“SNES NINJA GAIDEN”、日英版日文模式“SFC NINJA RYUKENDEN”），可直接选一、二、三代，支持密码续关；暂停选退出或按住 START+BACK 约 3 秒回选择画面，按 B 回主菜单。中文 / 日文模式启动日版，英文模式启动美版 TRILOGY。三部曲本身在 Xbox 360 上不能运行。",
+   d:T("主菜单入口（中文“SFC忍者龙剑传”、英文“SNES NINJA GAIDEN”、日文版日文模式“SFC NINJA RYUKENDEN”），可直接选一、二、三代，支持密码续关；暂停选退出或按住 START+BACK 约 3 秒回选择画面，按 B 回主菜单。中文 / 日文模式启动日版，英文模式启动美版 TRILOGY。三部曲本身在 Xbox 360 上不能运行。",
        "Main-menu entry (Chinese “SFC忍者龙剑传”, English “SNES NINJA GAIDEN”, Japanese build “SFC NINJA RYUKENDEN”); pick I, II or III directly, passwords supported; quit from pause or hold START+BACK ~3 s to return, B for the main menu. Chinese/Japanese mode runs the Japanese release, English mode the US TRILOGY. The trilogy itself does not run on the Xbox 360.",
-       "メインメニューの項目（中国語「SFC忍者龙剑传」、英語「SNES NINJA GAIDEN」、日英版日本語モード「SFC NINJA RYUKENDEN」）から一・二・三作を直接選択、パスワード対応。ポーズの終了か START+BACK 長押し約 3 秒で選択画面へ、B でメインメニューへ。中国語／日本語モードは日本版、英語モードは北米版。三部作自体は Xbox 360 では動きません。"),
+       "メインメニューの項目（中国語「SFC忍者龙剑传」、英語「SNES NINJA GAIDEN」、日本語版の日本語モード「SFC NINJA RYUKENDEN」）から一・二・三作を直接選択、パスワード対応。ポーズの終了か START+BACK 長押し約 3 秒で選択画面へ、B でメインメニューへ。中国語／日本語モードは日本版、英語モードは北米版。三部作自体は Xbox 360 では動きません。"),
    base:0, h:1},
  ]},
  {g:T("兼容与存档","Compatibility and saves","互換性・セーブ"), rows:[
   {n:T("Xbox 360 兼容修复","Xbox 360 fixes","Xbox 360 向けの修正"),
-   d:T("所有版本：第三人称镜头锁定敌人转动、控制器设置页叠字（均经 360 玩家实测）。中英版：情报 → 章节页崩溃。飓风版：过警告画面即关机（360 实测可进游戏）、进入 SFC 三部曲后整机死机（均经 360 实机确认）。",
+   d:T("所有版本：第三人称镜头锁定敌人转动、控制器设置页叠字（均经 360 玩家实测）。中文版：情报 → 章节页崩溃。飓风版：过警告画面即关机（360 实测可进游戏）、进入 SFC 三部曲后整机死机（均经 360 实机确认）。",
        "All editions: camera locking onto enemies and overlapping Controller Settings rows (both confirmed by 360 players). Chinese builds: Info → Chapter page crash. Hurricane: power-off after the warning screen (confirmed to boot on a 360) and the freeze when entering the SNES trilogy (both confirmed on a real 360).",
-       "全版：客観カメラが敵をロックして回る問題、コントローラー設定の重なり（いずれも 360 で確認済み）。中英版：情報 → 章画面のクラッシュ。ハリケーン版：警告画面後の電源断（360 で起動確認済み）、SFC 三部作選択時のフリーズ（いずれも 360 実機で確認済み）。"),
+       "全版：客観カメラが敵をロックして回る問題、コントローラー設定の重なり（いずれも 360 で確認済み）。中国語版：情報 → 章画面のクラッシュ。ハリケーン版：警告画面後の電源断（360 で起動確認済み）、SFC 三部作選択時のフリーズ（いずれも 360 実機で確認済み）。"),
    base:1, h:1},
   {n:T("移除存档的本机签名校验","Per-console save signature check removed","セーブの本体署名チェックを削除"),
    d:T("可以读取其他主机 / 模拟器（换了主机或 EEPROM）的存档和系统存档。只去掉本机签名比对，文件大小、解密解压、游戏签名等检查全部保留，损坏的存档仍会被拒绝；写出的存档仍带本机签名。",
@@ -748,7 +754,7 @@ function render(){
     const ks = ORDER.filter(k => LINE[k].ed === ed);
     return `<button class="ed" type="button" style="--c:${ED_COLOR[ed]}" data-ed="${ed}">
       <div class="n">${U.ed[ed]}</div><div class="tag">${U.edTag[ed]}</div>
-      <div class="vs">${ks.map(k => `<span class="v"><small>${U.lang[LINE[k].lang]}</small>${LATEST[k]}</span>`).join("")}</div>
+      <div class="vs">${ks.map(k => `<span class="v">${LATEST[k]}<span class="lgb ${LINE[k].lang}">${U.lang[LINE[k].lang]}</span></span>`).join("")}</div>
       <p>${U.edDesc[ed]}</p></button>`;
   }).join("");
 
@@ -775,7 +781,7 @@ function render(){
     const flags = (r.latest ? `<span class="flag latest">${U.flag.latest}</span>` : "") + (r.flags||[]).map(f => `<span class="flag ${f}">${U.flag[f]}</span>`).join("");
     html += `<article class="rel${r.latest?" latest":""}${r.withdrawn?" withdrawn":""}">
       <div class="rhead"><h3>${tx(r.title)}</h3><div class="flags">${flags}</div></div>
-      ${vers.length ? `<div class="vers">${vers.map(k => `<span class="ver" style="--c:${ED_COLOR[LINE[k].ed]}" title="${lineLabel(k,U)}">${r.v[k]}<small>${lineLabel(k,U)}</small></span>`).join("")}</div>` : ""}
+      ${vers.length ? `<div class="vers">${vers.map(k => `<span class="ver" style="--c:${ED_COLOR[LINE[k].ed]}" title="${lineLabel(k,U)}">${r.v[k]}<span class="lgb ${LINE[k].lang}">${U.lang[LINE[k].lang]}</span><small>${U.ed[LINE[k].ed]}</small></span>`).join("")}</div>` : ""}
       ${r.lead ? `<p class="lead">${tx(r.lead)}</p>` : ""}
       <ul class="items">${items.map(it => `<li><span class="kind k-${it.k}">${U.kind[it.k]}</span><div class="body">${tx(it.t)}<span class="dots">${itemTags(lines(it),U).map(([s,c]) => `<span style="--c:${c}">${s}</span>`).join("")}</span>${it.note ? `<div class="note${it.ok?" ok":""}">${it.ok?"✓":"⚠"} ${tx(it.note)}</div>` : ""}</div></li>`).join("")}</ul>
     </article>`;
