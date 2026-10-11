@@ -203,14 +203,14 @@ footer b,.qq{color:var(--bone)}
     <div class="dl">
       <a class="go" id="dlLink" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
-        <span><span data-i="dl"></span><small data-i="dlSub"></small></span>
+        <span><span id="dlName"></span><small data-i="dlSub"></small></span>
       </a>
       <span class="code"><span data-i="dlCode"></span><b>mjta</b></span>
       <button class="btn" type="button" id="dlCopy" data-i="dlCopy"></button>
       <span class="msg" id="dlMsg"></span>
       <a class="go alt" id="dlJp" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
-        <span><span data-i="dlJp"></span><small data-i="dlJpSub"></small></span>
+        <span><span id="dlJpName"></span><small data-i="dlJpSub"></small></span>
       </a>
     </div>
     <div class="slash"></div>
@@ -272,7 +272,7 @@ const ALL="A B B2 C C2", ZH="A B B2", HUR="B B2 C C2", BZH="B B2";
 const UI = {
  zh:{ eyebrow:"NINJA GAIDEN BLACK · 更新日志", h1:"忍者龙剑传 <em>黑之章</em><br>汉化与飓风补丁 更新日志",
   sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-10 的 x1，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
-  dl:"下载最新版", dlSub:"百度网盘 · 全部版本补丁合集", dlJp:"日英版下载", dlJpSub:"Google Drive · 给日本玩家", dlJpFoot:"日英版下载（Google Drive）：", dlCode:"提取码", dlCopy:"复制链接和提取码", dlFoot:"下载地址（百度网盘，提取码 mjta）：",
+  dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日英版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
   featTitle:"当前功能一览（x1）", featSub:"截至 2026-10-10 最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 的全部功能。✓ 有，— 无；日英版与中英版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
   pdf:"导出 PDF", md:"导出 Markdown", edTitle:"三个版本", cmpTitle:"飓风origin 与 飓风new 有什么区别",
   ed:{base:"基本版",new:"飓风new",origin:"飓风origin"}, lang:{zh:"中英",jp:"日英"},
@@ -292,7 +292,7 @@ const UI = {
   art:"背景图：游戏原版主视觉（隼龙）与标题画面纹理。", latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
-  dl:"All editions", dlSub:"Baidu Netdisk · bundle incl. the Chinese builds", dlJp:"Download the latest", dlJpSub:"Google Drive · Japanese/English editions", dlJpFoot:"Japanese build (Google Drive): ", dlCode:"Code", dlCopy:"Copy link + code", dlFoot:"Download (Baidu Netdisk, extraction code mjta): ",
+  dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese/English editions", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
   featTitle:"Current features (x1)", featSub:"Everything in the latest builds as of 2026-10-10: va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
   pdf:"Export PDF", md:"Export Markdown", edTitle:"Three editions", cmpTitle:"Hurricane origin vs. Hurricane new",
   ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin"}, lang:{zh:"zh/en",jp:"ja/en"},
@@ -312,7 +312,7 @@ const UI = {
   art:"Background: the game's original key art (Ryu) and title-screen texture.", latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
   sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-10 の x1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
-  dl:"中国語版をダウンロード", dlSub:"Baidu Netdisk · 全バージョンのパッチ一式", dlJp:"日英版をダウンロード", dlJpSub:"Google Drive · 日本のプレイヤー向け", dlJpFoot:"日英版のダウンロード（Google Drive）：", dlCode:"抽出コード", dlCopy:"リンクとコードをコピー", dlFoot:"ダウンロード（Baidu Netdisk、抽出コード mjta）：",
+  dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日英版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
   featTitle:"現在の機能一覧（x1）", featSub:"2026-10-10 時点の最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 の全機能。✓ あり、— なし。日英版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
   pdf:"PDF を出力", md:"Markdown を出力", edTitle:"3 つの版", cmpTitle:"ハリケーン origin と ハリケーン new の違い",
   ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin"}, lang:{zh:"中英",jp:"日英"},
@@ -719,6 +719,12 @@ function itemTags(ls, U){
   else { if (pn !== null) out.push([U.ed.new+pn,ED_COLOR.new]); if (po !== null) out.push([U.ed.origin+po,ED_COLOR.origin]); }
   return out;
 }
+/* download options: zh lists Baidu first, en/ja list Google Drive first; names are 方式一 / 方式二 in that order */
+function dlOrder(U){
+  const b = {key:"baidu", label:U.dlBaidu, url:DL_URL, code:DL_CODE, sub:U.dlSub};
+  const d = {key:"drive", label:U.dlDrive, url:DL_JP, code:"", sub:U.dlJpSub};
+  return (st.lang === "zh" ? [b, d] : [d, b]).map((o, i) => ({...o, name:U.dlN[i]}));
+}
 function tx(o){ return o ? (o[st.lang] || o.zh) : ""; }
 
 function visible(){
@@ -778,14 +784,17 @@ function render(){
   $("#count").textContent = U.count(vis.length, n);
   $("#dlLink").href = DL_URL; $("#dlJp").href = DL_JP;
   document.querySelector(".dl").classList.toggle("drive-first", st.lang !== "zh");
-  $("#foot").innerHTML = `<div class="dlfoot">${U.dlFoot}<a href="${DL_URL}" target="_blank" rel="noopener">${DL_URL}</a></div><div class="dlfoot">${U.dlJpFoot}<a href="${DL_JP}" target="_blank" rel="noopener">${DL_JP}</a></div><div>${U.credit}</div><div>${U.legal}</div><div class="priv">${U.priv}</div><div>${U.base}</div><div>${U.art}</div>`;
+  const dlRows = dlOrder(U);
+  $("#dlName").textContent = dlRows.find(d => d.key === "baidu").name;
+  $("#dlJpName").textContent = dlRows.find(d => d.key === "drive").name;
+  $("#foot").innerHTML = dlRows.map(d => `<div class="dlfoot"><b>${d.name}</b> · ${d.label}${d.code ? ` · ${U.dlCode} <b>${d.code}</b>` : ""} · <a href="${d.url}" target="_blank" rel="noopener">${d.url}</a></div>`).join("") + `<div>${U.credit}</div><div>${U.legal}</div><div class="priv">${U.priv}</div><div>${U.base}</div><div>${U.art}</div>`;
 }
 
 /* ===== markdown export (current language + filter) ===== */
 function strip(s){ return s.replace(/<b>(.*?)<\/b>/g,"**$1**").replace(/<br>/g," ").replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&nbsp;/g," "); }
 function toMarkdown(){
   const U = UI[st.lang], C = CMP[st.lang], L = [];
-  L.push(`# ${strip(U.h1)}`, "", `> ${U.sub}`, "", `**${U.dl}** · ${U.dlSub}: <${DL_URL}>  （${U.dlCode} \`${DL_CODE}\`）`, "", `**${U.dlJp}** · ${U.dlJpSub}: <${DL_JP}>`, "");
+  L.push(`# ${strip(U.h1)}`, "", `> ${U.sub}`, "", ...dlOrder(U).map(d => `**${d.name}** · ${d.sub} · <${d.url}>${d.code ? `　${U.dlCode} \`${d.code}\`` : ""}`), "");
   L.push(`## ${U.edTitle}`, "");
   for (const ed of ["base","new","origin"]){
     const ks = ORDER.filter(k => LINE[k].ed === ed);
