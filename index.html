@@ -269,20 +269,21 @@ footer b,.qq{color:var(--bone)}
 /* ===== lines: A = 基本版 中文版 · B = 飓风new 中文版 · B2 = 飓风origin 中文版 · C = 飓风new 日文版 · C2 = 飓风origin 日文版 ===== */
 const ORDER = ["A","B","B2","C","C2"];
 const LINE = {A:{ed:"base",lang:"zh"},B:{ed:"new",lang:"zh"},B2:{ed:"origin",lang:"zh"},C:{ed:"new",lang:"jp"},C2:{ed:"origin",lang:"jp"}};
-const LATEST = {A:"va-zh-x1",B:"vb-zh-new-x1",B2:"vb-zh-origin-x1",C:"vb-jp-new-x1",C2:"vb-jp-origin-x1"};
+const LATEST = {A:"va-zh-x1",B:"vb-zh-x2",C:"vb-jp-x2"};   /* x2: B′ / C′ merged into B / C (intercept is an option) */
 const DL_URL = "https://pan.baidu.com/s/1Yo7rFdCPU0zYuuuAjZD6Vw?pwd=mjta#list/path=%2F&vmode=list", DL_CODE = "mjta";
 const DL_JP = "https://drive.google.com/drive/folders/1_dLaeVUC_-j2Cy5hyTBP-WC7xDmLABzl?usp=drive_link";
 const ALL="A B B2 C C2", ZH="A B B2", HUR="B B2 C C2", BZH="B B2";
 
 const UI = {
  zh:{ eyebrow:"NINJA GAIDEN BLACK · 更新日志", h1:"忍者龙剑传 <em>黑之章</em><br>汉化与飓风补丁 更新日志",
-  sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-10 的 x1，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
+  sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-12 的 x2，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
   dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日文版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
-  featTitle:"当前功能一览（x1）", featSub:"截至 2026-10-10 最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
-  pdf:"导出 PDF", md:"导出 Markdown", edTitle:"三个版本", cmpTitle:"飓风origin 与 飓风new 有什么区别",
-  ed:{base:"基本版",new:"飓风new",origin:"飓风origin"}, lang:{zh:"中文版",jp:"日文版"},
-  edTag:{base:"中文版 · 原汁原味黑之章",new:"中文版 / 日文版 · 黑之章交差之法",origin:"中文版 / 日文版 · 一代交差之法"},
+  featTitle:"当前功能一览（x2）", featSub:"截至 2026-10-12 最新版 va-zh-x1 / vb-zh-x2 / vb-jp-x2 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
+  pdf:"导出 PDF", md:"导出 Markdown", edTitle:"两个版本", cmpTitle:"交差之法：飓风包 与 黑之章 有什么区别",
+  ed:{base:"基本版",new:"飓风new",origin:"飓风origin",hur:"飓风版"}, lang:{zh:"中文版",jp:"日文版"}, icHp:"飓风包", icBlack:"黑之章",
+  edTag:{base:"中文版 · 原汁原味黑之章",hur:"中文版 / 日文版 · 交差之法可切换",new:"中文版 / 日文版 · 黑之章交差之法",origin:"中文版 / 日文版 · 一代交差之法"},
   edDesc:{base:"只做汉化 + 修复视角 + 射箭准星，不含任何玩法改动。",
+   hur:"汉化 + 全部玩法改动：复活交差之法、安宁之腕轮、妖刀鬼彻扣血、SFC 忍者龙剑传三部曲、全隐藏服装、二周目等。交差之法在控制器设置里切换「飓风包 / 黑之章」（x2 起，取代原来的 new / origin 两个版本）。日文版不汉化，只加玩法改动。",
    new:"汉化 + 全部玩法改动：复活交差之法、安宁之腕轮、妖刀鬼彻扣血、SFC 忍者龙剑传三部曲、全隐藏服装、二周目等。交差之法为黑之章版。日文版不汉化，只加玩法改动。",
    origin:"与飓风new 内容完全相同，只有交差之法换成 2004 年初代《忍者龙剑传》飓风包的版本。"},
   fEd:"版本", fLang:"游戏语言", pageLang:"网页语言", langNote:"中文版：游戏内文字为简体中文（选项里可切换英文）。日文版：游戏内文字保持日文原样（可切换英文），不含汉化，只有飓风补丁的玩法改动。版本号里 zh = 中文版，jp = 日文版。", all:"全部", allLang:"全部语言", hur:"飓风",
@@ -295,13 +296,14 @@ const UI = {
   base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中文版，jp = 日文版。",
   latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
-  sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x1 (2026-10-10), newest first, filterable by edition and language.",
+  sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x2 (2026-10-12), newest first, filterable by edition and language.",
   dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese builds", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"Current features (x1)", featSub:"Everything in the latest builds as of 2026-10-10: va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
-  pdf:"Export PDF", md:"Export Markdown", edTitle:"Three editions", cmpTitle:"Hurricane origin vs. Hurricane new",
-  ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin"}, lang:{zh:"Chinese build",jp:"Japanese build"},
-  edTag:{base:"Chinese build · pure Black",new:"Chinese or Japanese build · Black's Intercept",origin:"Chinese or Japanese build · 2004 Intercept"},
+  featTitle:"Current features (x2)", featSub:"Everything in the latest builds as of 2026-10-12: va-zh-x1 / vb-zh-x2 / vb-jp-x2. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
+  pdf:"Export PDF", md:"Export Markdown", edTitle:"Two editions", cmpTitle:"Intercept: HurricanePack vs. Black",
+  ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin",hur:"Hurricane"}, lang:{zh:"Chinese build",jp:"Japanese build"}, icHp:"HurricanePack", icBlack:"Black",
+  edTag:{base:"Chinese build · pure Black",hur:"Chinese or Japanese build · switchable Intercept",new:"Chinese or Japanese build · Black's Intercept",origin:"Chinese or Japanese build · 2004 Intercept"},
   edDesc:{base:"Translation, camera fixes and a bow crosshair only. No gameplay changes.",
+   hur:"Translation plus every gameplay change: working Intercept, Armlet of Tranquility, the Kitetsu health drain, the SNES Ninja Gaiden trilogy, all hidden costumes, New Game+ and more. Intercept is switched in Controller Settings: HurricanePack / Black (since x2, replacing the separate new / origin editions). The Japanese build keeps the original Japanese text and adds only the gameplay changes.",
    new:"Translation plus every gameplay change: working Intercept, Armlet of Tranquility, the Kitetsu health drain, the SNES Ninja Gaiden trilogy, all hidden costumes, New Game+ and more. Intercept is Black's version. The Japanese build keeps the original Japanese text and adds only the gameplay changes.",
    origin:"Identical to Hurricane new except Intercept, which is replaced by the version from the 2004 NINJA GAIDEN Hurricane Pack."},
   fEd:"Edition", fLang:"Game language", pageLang:"Page language", langNote:"Chinese build: in-game text in Simplified Chinese (English selectable in Options). Japanese build: original Japanese in-game text (English selectable), no translation, only the Hurricane gameplay changes. In version names zh = Chinese build, jp = Japanese build.", all:"All", allLang:"All languages", hur:"Hurricane",
@@ -314,13 +316,14 @@ const UI = {
   base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese build, jp = Japanese build.",
   latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
-  sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-10 の x1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
+  sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-12 の x2 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
   dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日本語版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"現在の機能一覧（x1）", featSub:"2026-10-10 時点の最新版 va-zh-x1 / vb-*-new-x1 / vb-*-origin-x1 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
-  pdf:"PDF を出力", md:"Markdown を出力", edTitle:"3 つの版", cmpTitle:"ハリケーン origin と ハリケーン new の違い",
-  ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin"}, lang:{zh:"中国語版",jp:"日本語版"},
-  edTag:{base:"中国語版 · 『Black』そのまま",new:"中国語版 / 日本語版 · 『Black』の交差の法",origin:"中国語版 / 日本語版 · 初代の交差の法"},
+  featTitle:"現在の機能一覧（x2）", featSub:"2026-10-12 時点の最新版 va-zh-x1 / vb-zh-x2 / vb-jp-x2 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
+  pdf:"PDF を出力", md:"Markdown を出力", edTitle:"2 つの版", cmpTitle:"交差の法：HurricanePack と Black の違い",
+  ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin",hur:"ハリケーン版"}, lang:{zh:"中国語版",jp:"日本語版"}, icHp:"HurricanePack", icBlack:"Black",
+  edTag:{base:"中国語版 · 『Black』そのまま",hur:"中国語版 / 日本語版 · 交差の法を切替",new:"中国語版 / 日本語版 · 『Black』の交差の法",origin:"中国語版 / 日本語版 · 初代の交差の法"},
   edDesc:{base:"中国語化・カメラ修正・弓の照準のみ。ゲームプレイの変更はありません。",
+   hur:"中国語化＋すべての機能追加：交差の法の復活、安らぎの腕輪、妖刀鬼徹の体力減少、SFC『忍者龍剣伝』三部作、隠し衣装、二周目など。交差の法はコントローラー設定で HurricanePack／Black を切り替え（x2 から。これまでの new／origin の 2 版に代わるもの）。日本語版は翻訳せず、機能追加のみ。",
    new:"中国語化＋すべての機能追加：交差の法の復活、安らぎの腕輪、妖刀鬼徹の体力減少、SFC『忍者龍剣伝』三部作、隠し衣装、二周目など。交差の法は『Black』版。日本語版は翻訳せず、機能追加のみ。",
    origin:"ハリケーン new と同じ内容で、交差の法だけを 2004 年版『NINJA GAIDEN』ハリケーンパックのものに置き換えた版。"},
   fEd:"版", fLang:"ゲームの言語", pageLang:"ページの言語", langNote:"中国語版：ゲーム内の文字は簡体字中国語（オプションで英語に切替可）。日本語版：ゲーム内の文字は日本語のまま（英語に切替可）、翻訳なしでハリケーンパッチのゲームプレイ変更のみ。バージョン名の zh = 中国語版、jp = 日本語版。", all:"すべて", allLang:"全言語", hur:"ハリケーン",
@@ -335,35 +338,55 @@ const UI = {
 };
 
 const CMP = {
- zh:{ intro:"黑之章的数据里本来就有两套交差之法：一套和 2004 年初代《忍者龙剑传》飓风包一模一样，另一套是黑之章自己的。两个飓风版只差用哪一套，其余内容完全相同，存档通用，可以随时换着玩。触发方式两版一样（防御中，在敌人攻击打中的瞬间出手）；切换只改隼龙招式数据里的 20 个字节，程序相同。",
+ zh:{ intro:"黑之章的数据里本来就有两套交差之法：一套和 2004 年初代《忍者龙剑传》飓风包一模一样，另一套是黑之章自己的。x2 起两套合并到同一个飓风版里，在「控制器设置 → 交差之法」切换，默认「飓风包」，改完回到游戏立即生效（正在交差时不会中途切换）。触发方式两者一样（防御中，在敌人攻击打中的瞬间出手）；切换只改内存里隼龙招式数据的 20 个字节。x1 及以前分别是飓风new（= 黑之章）和飓风origin（= 飓风包）两个版本。",
   rows:[["用的是哪一套","黑之章自己的那一套","黑之章里保留的、与 2004 飓风包一模一样的那一套"],
         ["触发时的特效","更加闪烁","与飓风包相同"],
         ["交差后接 Y（瞬间蓄力）的窗口","更短，交差后要立刻按","更长，停一下再按也来得及"],
         ["交差后隼龙的站位","坚定地站在原地","向后退一段距离"],
-        ["标题画面右下角","Hurricane new","Hurricane origin"],
+        ["交差时手柄震动","不震（黑之章原版这套动作本来就没有震动）","震动（与普通格挡相同）"],
+        ["原来的版本","飓风new","飓风origin"],
         ["适合谁","喜欢黑之章原味手感的玩家","想体验一代（飓风包）手感的玩家"]],
-  foot:"2026-10-11 决定：两版都保持各自原版的交差规则，不改成 PS3《忍者龙剑传 Σ》的“精防即交差”。" },
- en:{ intro:"Black's data already contains two Intercept sets: one identical to the 2004 NINJA GAIDEN Hurricane Pack, and Black's own. The two Hurricane editions differ only in which set they use; everything else is identical, saves are shared, and you can switch at any time. Intercept triggers the same way in both (block, then strike as the enemy's attack connects). Switching changes 20 bytes of Ryu's move data; the program code is the same.",
+  foot:"2026-10-11 决定：两套都保持各自原版的交差规则，不改成 PS3《忍者龙剑传 Σ》的“精防即交差”。2026-10-12 决定：黑之章那套保持原样，不补震动。" },
+ en:{ intro:"Black's data already contains two Intercept sets: one identical to the 2004 NINJA GAIDEN Hurricane Pack, and Black's own. Since x2 both live in the single Hurricane edition and are switched under Controller Settings → Intercept (default HurricanePack); the change applies as soon as you return to the game (never in the middle of an Intercept). Intercept triggers the same way with both (block, then strike as the enemy's attack connects); switching rewrites 20 bytes of Ryu's move data in memory. Up to x1 these were two editions, Hurricane new (= Black) and Hurricane origin (= HurricanePack).",
   rows:[["Which set","Black's own set","The set kept in Black that is identical to the 2004 Hurricane Pack"],
         ["Effect on trigger","Flashier","Same as the Hurricane Pack"],
         ["Window for the Y follow-up (Ultimate Technique)","Shorter: press Y immediately","Longer: Y still works after a short pause"],
         ["Ryu after Intercept","Stands firm on the spot","Steps back a short distance"],
-        ["Title screen corner","Hurricane new","Hurricane origin"],
+        ["Controller rumble on Intercept","None (Black's own moves never had it)","Rumbles (same as a normal block)"],
+        ["Former edition","Hurricane new","Hurricane origin"],
         ["Who it's for","Players who want Black's original feel","Players who want the 2004 / Hurricane Pack feel"]],
-  foot:"Decision of 2026-10-11: both keep their original Intercept rules; neither adopts the PS3 Sigma “perfect block = Intercept” rule." },
- ja:{ intro:"『Black』のデータには交差の法が 2 組あります。2004 年版『NINJA GAIDEN』ハリケーンパックとまったく同じもの と、『Black』独自のものです。二つのハリケーン版の違いはどちらを使うかだけで、ほかはすべて同じ。セーブデータも共通で、いつでも切り替えられます。発動方法はどちらも同じ（防御中、敵の攻撃が当たる瞬間に出す）。切り替えはリュウの技データ 20 バイトのみで、プログラムは同じです。",
+  foot:"Decision of 2026-10-11: both keep their original Intercept rules; neither adopts the PS3 Sigma “perfect block = Intercept” rule. Decision of 2026-10-12: Black's set stays as it is, no rumble added." },
+ ja:{ intro:"『Black』のデータには交差の法が 2 組あります。2004 年版『NINJA GAIDEN』ハリケーンパックとまったく同じものと、『Black』独自のものです。x2 から両方を 1 つのハリケーン版にまとめ、「コントローラー設定 → Intercept」で切り替えます（初期値 HurricanePack）。ゲームに戻るとすぐ反映されます（交差の法の最中には切り替わりません）。発動方法はどちらも同じ（防御中、敵の攻撃が当たる瞬間に出す）。切り替えはメモリ上のリュウの技データ 20 バイトのみです。x1 まではハリケーン new（= Black）とハリケーン origin（= HurricanePack）の 2 版でした。",
   rows:[["使う組","『Black』独自の組","『Black』に残っている、ハリケーンパックとまったく同じ組"],
         ["発動時のエフェクト","より激しく明滅","ハリケーンパックと同じ"],
         ["交差後の Y（溜め攻撃）の猶予","短い：すぐに押す必要あり","長い：少し間を置いても間に合う"],
         ["交差後のリュウ","その場にしっかり踏みとどまる","少し後ろへ下がる"],
-        ["タイトル画面右下","Hurricane new","Hurricane origin"],
+        ["交差時の振動","なし（『Black』のこの動作にはもともと振動がない）","あり（通常の防御と同じ）"],
+        ["これまでの版","ハリケーン new","ハリケーン origin"],
         ["おすすめ","『Black』本来の操作感が好きな人","初代（ハリケーンパック）の操作感を味わいたい人"]],
-  foot:"2026-10-11 決定：どちらも元の交差の法のルールを維持し、PS3『NINJA GAIDEN Σ』の「ジャスト防御＝交差」には変更しません。" }
+  foot:"2026-10-11 決定：どちらも元の交差の法のルールを維持し、PS3『NINJA GAIDEN Σ』の「ジャスト防御＝交差」には変更しません。2026-10-12 決定：『Black』の組はそのままとし、振動は追加しません。" }
 };
 
 /* kind: fix · new · zh · 360 · misc.  l: lines containing the change (B′/C′ inherit B/C unless only). */
 const RELEASES = [
- {date:"2026-10-10", latest:true, flags:["x360"], v:{A:"va-zh-x1",B:"vb-zh-new-x1",B2:"vb-zh-origin-x1",C:"vb-jp-new-x1",C2:"vb-jp-origin-x1"},
+ {date:"2026-10-12", latest:true, merged:true, flags:["new"], v:{B:"vb-zh-x2",C:"vb-jp-x2"},
+  title:{zh:"x2 · 飓风版合并，交差之法可切换",en:"x2 · One Hurricane edition, switchable Intercept",ja:"x2 · ハリケーン版を統合、交差の法を切替式に"},
+  lead:{zh:"从这一版起飓风版不再分 new / origin：两种交差之法合并到同一个版本，在控制器设置中切换。基本版仍为 va-zh-x1，本次未更新。",en:"From this release the Hurricane edition is no longer split into new / origin: both Intercept sets are in one build and switched in Controller Settings. Basic stays at va-zh-x1 (not updated).",ja:"この版からハリケーン版を new／origin に分けず、2 種類の交差の法を 1 つの版にまとめてコントローラー設定で切り替えます。基本版は va-zh-x1 のまま（今回は更新なし）。"},
+  items:[
+   {k:"new",l:HUR,t:{zh:"<b>控制器设置新增「交差之法」</b>（第 4 行，原「弓箭准星」的位置）：<b>飓风包</b>（默认，= 原 origin 版：后退一段、接瞬间蓄力 Y 的窗口长、交差时手柄震动）/ <b>黑之章</b>（= 原 new 版：原地不动、特效更闪、窗口短、不震动）。改完回到游戏立即生效，正在交差时不会中途切换；「恢复默认设置」回到飓风包；设置随系统存档保存，旧系统存档为飓风包。",
+     en:"<b>New Controller Settings row “Intercept”</b> (4th row, where Bow Crosshair was): <b>HurricanePack</b> (default, = the former origin: steps back, long window for the instant charge Y, rumbles) / <b>Black</b> (= the former new: stands firm, flashier, short window, no rumble). Applies as soon as you return to the game, never mid-Intercept; Default Settings returns to HurricanePack; stored in the system data (older system data: HurricanePack).",
+     ja:"<b>コントローラー設定に「Intercept」を追加</b>（4 行目、これまでの Bow Crosshair の位置）：<b>HurricanePack</b>（初期値、= 旧 origin：少し後退、溜め Y の猶予が長い、振動あり）／<b>Black</b>（= 旧 new：その場に踏みとどまる、エフェクトが強い、猶予が短い、振動なし）。ゲームに戻るとすぐ反映（交差の最中は切り替わりません）。Default Settings で HurricanePack に戻り、設定はシステムデータに保存（以前のデータは HurricanePack）。"}},
+   {k:"misc",l:HUR,t:{zh:"<b>「弓箭准星」移到画面设置</b>，在「画面调整」之后；开 / 关不变，原来的设置保留。画面设置的「恢复默认设置」（宽屏模式才有）把准星恢复为「开」。",
+     en:"<b>Bow Crosshair moved to Screen Settings</b>, right after Screen Adjustment; On/Off unchanged and kept. The Screen Settings Default Settings row (widescreen only) turns it back On.",
+     ja:"<b>Bow Crosshair を画面設定へ移動</b>（Screen Adjustment の次）。On／Off と設定内容はそのまま。画面設定の Default Settings（ワイド画面時のみ）で On に戻ります。"}},
+   {k:"fix",l:HUR,t:{zh:"修正控制器设置的按键提示：x / x1 中光标停在「水中操作」时下方多显示「选择」（这一行只能左右切换），现在与其他可切换项一样只显示「返回」。",
+     en:"Controller Settings button hint fixed: in x / x1 the Controls While in Water row also showed “Select” (it only toggles left/right); it now shows only “Back” like the other option rows.",
+     ja:"コントローラー設定のボタン表示を修正：x／x1 では Controls While in Water で「Select」が余分に表示されていました（左右で切り替えるだけの項目）。他の切替項目と同じく「Back」のみに。"}},
+   {k:"misc",l:HUR,t:{zh:"标题画面右下角改为 <b>Hurricane</b>（去掉 new / origin）；版本名改为 vb-zh-x2 / vb-jp-x2。",en:"Title screen corner now reads <b>Hurricane</b> (no new / origin); versions are named vb-zh-x2 / vb-jp-x2.",ja:"タイトル画面右下を <b>Hurricane</b> に（new／origin を外しました）。バージョン名は vb-zh-x2／vb-jp-x2。"}},
+   {k:"360",l:HUR,t:{zh:"新增代码按 Xbox 360 兼容规则编写：新代码全部放在新数据之前，已有代码不挪动，补丁区在新增部分之前与 x1 逐字节相同。",en:"New code follows the Xbox 360 rules: all new code before all new data, nothing existing moved; the patch area before the new part is byte-identical to x1.",ja:"追加コードは Xbox 360 互換ルールに従って作成：新しいコードはすべて新しいデータの前、既存コードは移動せず、追加部分より前のパッチ領域は x1 と同一。"},
+    note:{zh:"x2 新增的交差之法切换与画面设置里的弓箭准星尚未在 Xbox 360 和初代 Xbox 实机上测试，遇到问题请反馈。",en:"The x2 Intercept switch and the moved crosshair have not yet been tested on a real Xbox 360 or original Xbox; please report problems.",ja:"x2 で追加した交差の法の切替と画面設定の照準は、Xbox 360・初代 Xbox 実機ではまだ確認していません。問題があればお知らせください。"}}
+  ]},
+ {date:"2026-10-10", flags:["x360"], v:{A:"va-zh-x1",B:"vb-zh-new-x1",B2:"vb-zh-origin-x1",C:"vb-jp-new-x1",C2:"vb-jp-origin-x1"},
   title:{zh:"x1 · Xbox 360 修复版",en:"x1 · Xbox 360 fixes",ja:"x1 · Xbox 360 修正版"},
   lead:{zh:"修复 x 版在 Xbox 360 上的两个问题（均已在 360 实机确认），功能与 x 版相同，存档通用。",en:"Fixes two Xbox 360 problems in x (both confirmed on a real 360). Features are the same as x; saves are compatible.",ja:"x の Xbox 360 での問題を 2 つ修正（いずれも 360 実機で確認済み）。機能は x と同じで、セーブデータも共通です。"},
   items:[
@@ -600,10 +623,10 @@ const FEAT = [
        "会話・メニューは源ノ角ゴシック Bold（16px でも鮮明）、タイトル・章名・地図・書道文字は宋朝体風の書体。"),
    base:1, h:T("中文版 ✓ ／ 日文版：原版字体","Chinese ✓ / Japanese build: original fonts","中国語版 ✓ ／ 日本語版：オリジナル")},
   {n:T("标题画面标识与署名","Title screen marks and credits","タイトル画面の表示とクレジット"),
-   d:T("版权条下方署名「程序&翻译：B站 Logo 哈雅布撒」；健康警告末尾追加非盈利声明与反馈 QQ。飓风版右下角另有 Hurricane new / Hurricane origin 与银白 CZ 标志。",
-       "Credit under the copyright line with the bilibili logo; a non-commercial notice and QQ after the health warning. Hurricane editions also show Hurricane new / Hurricane origin and a silver CZ mark.",
-       "コピーライトの下にクレジット（bilibili ロゴ付き）、警告画面に非営利の注記と連絡先。ハリケーン版は右下に Hurricane new／Hurricane origin と銀白の CZ マーク。"),
-   base:T("署名","credit","クレジット"), new:T("Hurricane new + CZ","Hurricane new + CZ","Hurricane new + CZ"), origin:T("Hurricane origin + CZ","Hurricane origin + CZ","Hurricane origin + CZ")}
+   d:T("版权条下方署名「程序&翻译：B站 Logo 哈雅布撒」；健康警告末尾追加非盈利声明与反馈 QQ。飓风版右下角另有 Hurricane 与银白 CZ 标志。",
+       "Credit under the copyright line with the bilibili logo; a non-commercial notice and QQ after the health warning. The Hurricane edition also shows Hurricane and a silver CZ mark.",
+       "コピーライトの下にクレジット（bilibili ロゴ付き）、警告画面に非営利の注記と連絡先。ハリケーン版は右下に Hurricane と銀白の CZ マーク。"),
+   base:T("署名","credit","クレジット"), h:T("Hurricane + CZ","Hurricane + CZ","Hurricane + CZ")}
  ]},
  {g:T("镜头与操作","Camera and controls","カメラ・操作"), rows:[
   {n:T("默认第三人称自由镜头","Free third-person camera by default","最初から客観（三人称）カメラ"),
@@ -615,17 +638,17 @@ const FEAT = [
        "初期設定は現在の一般的なゲームと同じ向き。コントローラー設定の Camera Control が客観・主観の両方に効き、Reverse で両方の上下左右が反転（客観は 2005 年オリジナルの操作感）。"),
    base:1, h:1},
   {n:T("弓箭准星","Bow crosshair","弓の照準"),
-   d:T("架弓瞄准时屏幕正中显示白色细十字（箭的命中点），所有弓都有（已实测）；控制器设置「弓箭准星」可关闭，默认开启。",
-       "A thin white cross at the arrow's impact point while aiming, with every bow (tested); can be turned off with Bow Crosshair (default On).",
-       "弓を構えると画面中央に白い細十字（着弾点）。すべての弓で表示（確認済み）。Bow Crosshair でオフ可（初期値 On）。"),
+   d:T("架弓瞄准时屏幕正中显示白色细十字（箭的命中点），所有弓都有（已实测）；「弓箭准星」可关闭，默认开启（基本版在控制器设置，飓风版 x2 起在画面设置）。",
+       "A thin white cross at the arrow's impact point while aiming, with every bow (tested); can be turned off with Bow Crosshair (default On; Controller Settings in Basic, Screen Settings in Hurricane since x2).",
+       "弓を構えると画面中央に白い細十字（着弾点）。すべての弓で表示（確認済み）。Bow Crosshair でオフ可（初期値 On。基本版はコントローラー設定、ハリケーン版は x2 から画面設定）。"),
    base:1, h:1}
  ]},
  {g:T("玩法改动（只在飓风版）","Gameplay changes (Hurricane only)","ゲームプレイの変更（ハリケーン版のみ）"), rows:[
   {n:T("秘传书「交差之法」可用","The Intercept scroll works","秘伝書「交差の法」が使える"),
-   d:T("黑之章里能装备却没有效果，现已恢复。防御中在敌人攻击打中的瞬间出手。两个飓风版用的是不同的一套，区别见下方对比表。",
-       "In Black it could be equipped but did nothing; now restored. Strike as the enemy's attack lands while blocking. The two Hurricane editions use different sets; see the comparison below.",
-       "『Black』では装備しても効果がありませんでしたが、復元しました。防御中、敵の攻撃が当たる瞬間に出します。二つのハリケーン版で使う組が異なります（下の比較表）。"),
-   base:0, new:T("黑之章那套","Black's set","『Black』の組"), origin:T("飓风包那套","Hurricane Pack set","ハリケーンパックの組")},
+   d:T("黑之章里能装备却没有效果，现已恢复。防御中在敌人攻击打中的瞬间出手。两套交差动作在控制器设置「交差之法」切换（飓风包 / 黑之章，默认飓风包），区别见下方对比表。",
+       "In Black it could be equipped but did nothing; now restored. Strike as the enemy's attack lands while blocking. Choose the move set under Controller Settings → Intercept (HurricanePack / Black, default HurricanePack); see the comparison below.",
+       "『Black』では装備しても効果がありませんでしたが、復元しました。防御中、敵の攻撃が当たる瞬間に出します。動作の組はコントローラー設定の Intercept で切り替え（HurricanePack／Black、初期値 HurricanePack。下の比較表）。"),
+   base:0, h:T("可切换：飓风包 / 黑之章","Switchable: HurricanePack / Black","切替：HurricanePack／Black")},
   {n:T("交差之法加业力","Intercept karma bonus","交差の法のカルマ加算"),
    d:T("计分战斗中每次成功 +1000 业力（每场最多 50 次），所有难度都有；战斗结算栏像飓风包一样多出“交差”一行。",
        "+1000 karma per Intercept in scored battles (max 50 per battle) on every difficulty; the battle tally shows an Intercept line as in the Hurricane Pack.",
@@ -679,16 +702,16 @@ const FEAT = [
        "他の本体／エミュレータ（本体や EEPROM の変更）のセーブデータ・システムデータを読み込めます。本体署名の照合のみ外し、サイズ・復号・ゲーム署名のチェックは維持（壊れたデータは読み込まない）。書き出すデータは従来どおり署名付き。"),
    base:0, h:1},
   {n:T("存档通用","Shared saves","セーブデータ共通"),
-   d:T("同一语言的版本之间存档通用（如飓风new ↔ 飓风origin 可以随时换着玩）。升级只需用原版镜像重新打新补丁，首次启动会重新安装缓存。",
-       "Saves are shared between builds of the same language (switch freely between Hurricane new and origin). To update, patch the original image again; the first boot reinstalls the cache.",
-       "同じ言語の版同士でセーブデータ共通（ハリケーン new ↔ origin を自由に切り替え可）。更新はオリジナルのイメージにパッチを当て直すだけ。初回起動時にキャッシュを再インストール。"),
+   d:T("同一语言的版本之间存档通用，x1 及以前飓风new / 飓风origin 的存档在 x2 里都能直接读。升级只需用原版镜像重新打新补丁，首次启动会重新安装缓存。",
+       "Saves are shared between builds of the same language; saves from the old Hurricane new / origin builds load in x2. To update, patch the original image again; the first boot reinstalls the cache.",
+       "同じ言語の版同士でセーブデータ共通。x1 以前のハリケーン new／origin のセーブデータも x2 でそのまま読めます。更新はオリジナルのイメージにパッチを当て直すだけ。初回起動時にキャッシュを再インストール。"),
    base:1, h:1}
  ]}
 ];
 const ISSUES = {
- zh:["主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
- en:["With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
- ja:["本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
+ zh:["飓风版 x2：交差之法切换与画面设置里的弓箭准星尚未在 Xbox 360 和初代 Xbox 实机上测试。","主机系统语言为英文时，开机的版权警告仍显示英文（进游戏后正常）。","任务模式尚未完整实机检查，如有漏译欢迎反馈。","飓风版：关卡里的街机游戏机玩过一次后，互动提示有时会消失（原版同样如此）。","飓风版：最终章真正打通后的通关存档尚未实机验证（流程已按初代原版逐项对照测试）。"],
+ en:["Hurricane x2: the Intercept switch and the crosshair on Screen Settings are not yet tested on a real Xbox 360 or original Xbox.","With the console language set to English, the boot copyright warning stays English (the game itself is fine).","Mission mode has not been fully checked in play; please report missing translations.","Hurricane: after playing an in-level arcade cabinet once, its interact prompt sometimes disappears (same in the original).","Hurricane: a clear save from actually beating the final chapter has not been verified in play (the flow was tested step by step against the 2004 original)."],
+ ja:["ハリケーン版 x2：交差の法の切替と画面設定の照準は、Xbox 360・初代 Xbox 実機で未確認です。","本体の言語が英語のとき、起動時の著作権警告は英語のまま（ゲーム内は正常）。","ミッションモードは全体を確認しきれていません。訳漏れはお知らせください。","ハリケーン版：ステージ内のアーケード筐体は、一度遊ぶと調べる表示が消えることがあります（オリジナルでも発生）。","ハリケーン版：最終章を実際にクリアしたクリアデータは未検証（流れは初代と項目ごとに照合済み）。"]
 };
 
 /* ===== state ===== */
@@ -699,17 +722,21 @@ function save(k,v){ try { localStorage.setItem("ngb-cl2-"+k, v); } catch(e){} }
 { const nav=(navigator.language||"zh").toLowerCase(); st.lang = nav.startsWith("ja") ? "ja" : nav.startsWith("zh") ? "zh" : "en"; }
 const sl = load("lang"); if (UI[sl]) st.lang = sl;
 const h = location.hash.slice(1); if (UI[h]) st.lang = h;
-const se = load("ed"); if (["all","base","new","origin"].includes(se)) st.ed = se;
+const se = load("ed"); if (["all","base","hur"].includes(se)) st.ed = se; else if (["new","origin"].includes(se)) st.ed = "hur";   /* x2: one Hurricane edition */
 const sn = load("ln"); if (["all","zh","jp"].includes(sn)) st.ln = sn;
 
-const ED_COLOR = {base:"var(--ed-base)",new:"var(--ed-new)",origin:"var(--ed-origin)"};
+const ED_COLOR = {base:"var(--ed-base)",new:"var(--ed-new)",origin:"var(--ed-origin)",hur:"var(--ed-new)"};
+const EDS = ["base","hur"];                                   /* current editions (x2); new / origin remain for history */
+function edOf(k){ return LINE[k].ed === "base" ? "base" : "hur"; }
+/* edition shown on a version chip: releases from x2 on are "merged" (no new / origin) */
+function chipEd(r, k){ return r.merged && LINE[k].ed !== "base" ? "hur" : LINE[k].ed; }
 function lines(it){
   const s = new Set(it.l.split(" "));
   if (!it.only){ if (s.has("B")) s.add("B2"); if (s.has("C")) s.add("C2"); }
   return ORDER.filter(k => s.has(k));
 }
-function selected(){ return ORDER.filter(k => (st.ed==="all"||LINE[k].ed===st.ed) && (st.ln==="all"||LINE[k].lang===st.ln)); }
-function lineLabel(k, U){ return `${U.ed[LINE[k].ed]}${LINE[k].ed==="base"?"":" · "+U.lang[LINE[k].lang]}`; }
+function selected(){ return ORDER.filter(k => (st.ed==="all"||edOf(k)===st.ed) && (st.ln==="all"||LINE[k].lang===st.ln)); }
+function lineLabel(k, U, r){ const e = r ? chipEd(r,k) : LINE[k].ed; return `${U.ed[e]}${e==="base"?"":" · "+U.lang[LINE[k].lang]}`; }
 /* compact edition labels for an item: 全部 / 基本版 / 飓风 / new / origin, with a language suffix when only one language */
 function itemTags(ls, U){
   const has = k => ls.includes(k), out = [];
@@ -746,8 +773,8 @@ function render(){
   document.querySelectorAll("[data-ih]").forEach(e => e.innerHTML = U[e.dataset.ih]);
   document.querySelectorAll("#langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === st.lang));
 
-  $("#eds").innerHTML = ["base","new","origin"].map(ed => {
-    const ks = ORDER.filter(k => LINE[k].ed === ed);
+  $("#eds").innerHTML = EDS.map(ed => {
+    const ks = ORDER.filter(k => edOf(k) === ed && LATEST[k]);
     return `<button class="ed" type="button" style="--c:${ED_COLOR[ed]}" data-ed="${ed}">
       <div class="n">${U.ed[ed]}</div><div class="tag">${U.edTag[ed]}</div>
       <div class="vs">${ks.map(k => `<span class="v">${LATEST[k]}<span class="lgb ${LINE[k].lang}">${U.lang[LINE[k].lang]}</span></span>`).join("")}</div>
@@ -755,17 +782,17 @@ function render(){
   }).join("");
 
   const cell = v => v === 1 ? `<span class="y">✓</span>` : v === 0 ? `<span class="no">—</span>` : `<span class="txt">${tx(v)}</span>`;
-  $("#feat").innerHTML = `<table><thead><tr><th>${U.featCol}</th><th class="base">${U.ed.base}</th><th class="new">${U.ed.new}</th><th class="origin">${U.ed.origin}</th></tr></thead><tbody>` +
-    FEAT.map(g => `<tr class="grp-row"><th colspan="4">${tx(g.g)}</th></tr>` + g.rows.map(r =>
-      `<tr><td><span class="fn">${tx(r.n)}</span><span class="fd">${tx(r.d)}</span></td><td class="c">${cell(r.base)}</td><td class="c">${cell(r.h ?? r.new)}</td><td class="c">${cell(r.h ?? r.origin)}</td></tr>`).join("")).join("") + `</tbody></table>`;
+  $("#feat").innerHTML = `<table><thead><tr><th>${U.featCol}</th><th class="base">${U.ed.base}</th><th class="new">${U.ed.hur}</th></tr></thead><tbody>` +
+    FEAT.map(g => `<tr class="grp-row"><th colspan="3">${tx(g.g)}</th></tr>` + g.rows.map(r =>
+      `<tr><td><span class="fn">${tx(r.n)}</span><span class="fd">${tx(r.d)}</span></td><td class="c">${cell(r.base)}</td><td class="c">${cell(r.h)}</td></tr>`).join("")).join("") + `</tbody></table>`;
   $("#issues").innerHTML = ISSUES[st.lang].map(i => `<li>${i}</li>`).join("");
   const C = CMP[st.lang];
   $("#cmp").innerHTML = `<p class="intro">${C.intro}</p><div class="tbl"><table>
-    <thead><tr><th>${U.vs}</th><th class="new">${U.ed.new}</th><th class="origin">${U.ed.origin}</th></tr></thead>
+    <thead><tr><th>${U.vs}</th><th class="new">${U.icBlack}</th><th class="origin">${U.icHp}</th></tr></thead>
     <tbody>${C.rows.map(r => `<tr><th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table></div>
     <p class="foot">${C.foot}</p>`;
 
-  $("#fEd").innerHTML = `<span class="lbl">${U.fEd}</span>` + [["all",U.all,""],["base",U.ed.base,ED_COLOR.base],["new",U.ed.new,ED_COLOR.new],["origin",U.ed.origin,ED_COLOR.origin]]
+  $("#fEd").innerHTML = `<span class="lbl">${U.fEd}</span>` + [["all",U.all,""],["base",U.ed.base,ED_COLOR.base],["hur",U.ed.hur,ED_COLOR.hur]]
     .map(([v,t,c]) => `<button class="chip" type="button" data-fed="${v}" aria-pressed="${st.ed===v}" ${c?`style="--c:${c}"`:""}>${c?"<i></i>":""}${t}</button>`).join("");
   $("#fLang").innerHTML = `<span class="lbl">${U.fLang}</span>` + [["all",U.allLang],["zh",U.lang.zh],["jp",U.lang.jp]]
     .map(([v,t]) => `<button class="chip" type="button" data-fln="${v}" aria-pressed="${st.ln===v}">${t}</button>`).join("");
@@ -777,7 +804,7 @@ function render(){
     const flags = (r.latest ? `<span class="flag latest">${U.flag.latest}</span>` : "") + (r.flags||[]).map(f => `<span class="flag ${f}">${U.flag[f]}</span>`).join("");
     html += `<article class="rel${r.latest?" latest":""}${r.withdrawn?" withdrawn":""}">
       <div class="rhead"><h3>${tx(r.title)}</h3><div class="flags">${flags}</div></div>
-      ${vers.length ? `<div class="vers">${vers.map(k => `<span class="ver" style="--c:${ED_COLOR[LINE[k].ed]}" title="${lineLabel(k,U)}">${r.v[k]}<span class="lgb ${LINE[k].lang}">${U.lang[LINE[k].lang]}</span><small>${U.ed[LINE[k].ed]}</small></span>`).join("")}</div>` : ""}
+      ${vers.length ? `<div class="vers">${vers.map(k => `<span class="ver" style="--c:${ED_COLOR[chipEd(r,k)]}" title="${lineLabel(k,U,r)}">${r.v[k]}<span class="lgb ${LINE[k].lang}">${U.lang[LINE[k].lang]}</span><small>${U.ed[chipEd(r,k)]}</small></span>`).join("")}</div>` : ""}
       ${r.lead ? `<p class="lead">${tx(r.lead)}</p>` : ""}
       <ul class="items">${items.map(it => `<li><span class="kind k-${it.k}">${U.kind[it.k]}</span><div class="body">${tx(it.t)}<span class="dots">${itemTags(lines(it),U).map(([s,c]) => `<span style="--c:${c}">${s}</span>`).join("")}</span>${it.note ? `<div class="note${it.ok?" ok":""}">${it.ok?"✓":"⚠"} ${tx(it.note)}</div>` : ""}</div></li>`).join("")}</ul>
     </article>`;
@@ -798,18 +825,18 @@ function toMarkdown(){
   const U = UI[st.lang], C = CMP[st.lang], L = [];
   L.push(`# ${strip(U.h1)}`, "", `> ${U.sub}`, "", ...dlOrder(U).map(d => `**${d.name}** · ${d.sub} · <${d.url}>${d.code ? `　${U.dlCode} \`${d.code}\`` : ""}`), "");
   L.push(`## ${U.edTitle}`, "");
-  for (const ed of ["base","new","origin"]){
-    const ks = ORDER.filter(k => LINE[k].ed === ed);
+  for (const ed of EDS){
+    const ks = ORDER.filter(k => edOf(k) === ed && LATEST[k]);
     L.push(`- **${U.ed[ed]}**（${U.edTag[ed]}）：${ks.map(k => `${U.lang[LINE[k].lang]} \`${LATEST[k]}\``).join(" / ")}。${U.edDesc[ed]}`);
   }
   const mc = v => v === 1 ? "✓" : v === 0 ? "—" : tx(v);
-  L.push("", `## ${U.featTitle}`, "", U.featSub, "", `| ${U.featCol} | ${U.ed.base} | ${U.ed.new} | ${U.ed.origin} |`, "|---|---|---|---|");
+  L.push("", `## ${U.featTitle}`, "", U.featSub, "", `| ${U.featCol} | ${U.ed.base} | ${U.ed.hur} |`, "|---|---|---|");
   for (const g of FEAT){
-    L.push(`| **${tx(g.g)}** | | | |`);
-    for (const r of g.rows) L.push(`| **${tx(r.n)}**：${tx(r.d)} | ${mc(r.base)} | ${mc(r.h ?? r.new)} | ${mc(r.h ?? r.origin)} |`);
+    L.push(`| **${tx(g.g)}** | | |`);
+    for (const r of g.rows) L.push(`| **${tx(r.n)}**：${tx(r.d)} | ${mc(r.base)} | ${mc(r.h)} |`);
   }
   L.push("", `### ${U.issuesTitle}`, "", ...ISSUES[st.lang].map(i => `- ${i}`));
-  L.push("", `## ${U.cmpTitle}`, "", C.intro, "", `| ${U.vs||" "} | ${U.ed.new} | ${U.ed.origin} |`, "|---|---|---|");
+  L.push("", `## ${U.cmpTitle}`, "", C.intro, "", `| ${U.vs||" "} | ${U.icBlack} | ${U.icHp} |`, "|---|---|---|");
   for (const r of C.rows) L.push(`| ${r.join(" | ")} |`);
   L.push("", C.foot, "");
   const sel = selected();
@@ -818,7 +845,7 @@ function toMarkdown(){
   for (const {r, items, vers} of visible()){
     const flags = [r.latest?U.flag.latest:null, ...(r.flags||[]).map(f => U.flag[f])].filter(Boolean);
     L.push(`### ${r.date} · ${strip(tx(r.title))}${flags.length?`  [${flags.join(" / ")}]`:""}`, "");
-    if (vers.length) L.push(vers.map(k => `\`${r.v[k]}\` ${lineLabel(k,U)}`).join(" · "), "");
+    if (vers.length) L.push(vers.map(k => `\`${r.v[k]}\` ${lineLabel(k,U,r)}`).join(" · "), "");
     if (r.lead) L.push(`> ${strip(tx(r.lead))}`, "");
     for (const it of items){
       const tags = itemTags(lines(it),U).map(t => t[0]).join(", ");
