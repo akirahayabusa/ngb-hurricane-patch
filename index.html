@@ -269,7 +269,7 @@ footer b,.qq{color:var(--bone)}
 /* ===== lines: A = 基本版 中文版 · B = 飓风new 中文版 · B2 = 飓风origin 中文版 · C = 飓风new 日文版 · C2 = 飓风origin 日文版 ===== */
 const ORDER = ["A","B","B2","C","C2"];
 const LINE = {A:{ed:"base",lang:"zh"},B:{ed:"new",lang:"zh"},B2:{ed:"origin",lang:"zh"},C:{ed:"new",lang:"jp"},C2:{ed:"origin",lang:"jp"}};
-const LATEST = {A:"va-zh-x1",B:"vb-zh-x2",C:"vb-jp-x2"};   /* x2: B′ / C′ merged into B / C (intercept is an option) */
+const LATEST = {A:"va-zh-x2",B:"vb-zh-x2",C:"vb-jp-x2"};   /* x2: B′ / C′ merged into B / C (intercept is an option) */
 const DL_URL = "https://pan.baidu.com/s/1Yo7rFdCPU0zYuuuAjZD6Vw?pwd=mjta#list/path=%2F&vmode=list", DL_CODE = "mjta";
 const DL_JP = "https://drive.google.com/drive/folders/1_dLaeVUC_-j2Cy5hyTBP-WC7xDmLABzl?usp=drive_link";
 const ALL="A B B2 C C2", ZH="A B B2", HUR="B B2 C C2", BZH="B B2";
@@ -278,7 +278,7 @@ const UI = {
  zh:{ eyebrow:"NINJA GAIDEN BLACK · 更新日志", h1:"忍者龙剑传 <em>黑之章</em><br>汉化与飓风补丁 更新日志",
   sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-12 的 x2，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
   dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日文版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
-  featTitle:"当前功能一览（x2）", featSub:"截至 2026-10-12 最新版 va-zh-x1 / vb-zh-x2 / vb-jp-x2 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
+  featTitle:"当前功能一览（x2）", featSub:"截至 2026-10-12 最新版 va-zh-x2 / vb-zh-x2 / vb-jp-x2 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
   pdf:"导出 PDF", md:"导出 Markdown", edTitle:"两个版本", cmpTitle:"交差之法：飓风包 与 黑之章 有什么区别",
   ed:{base:"基本版",new:"飓风new",origin:"飓风origin",hur:"飓风版"}, lang:{zh:"中文版",jp:"日文版"}, icHp:"飓风包", icBlack:"黑之章",
   edTag:{base:"中文版 · 原汁原味黑之章",hur:"中文版 / 日文版 · 交差之法可切换",new:"中文版 / 日文版 · 黑之章交差之法",origin:"中文版 / 日文版 · 一代交差之法"},
@@ -298,7 +298,7 @@ const UI = {
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
   sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x2 (2026-10-12), newest first, filterable by edition and language.",
   dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese builds", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"Current features (x2)", featSub:"Everything in the latest builds as of 2026-10-12: va-zh-x1 / vb-zh-x2 / vb-jp-x2. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
+  featTitle:"Current features (x2)", featSub:"Everything in the latest builds as of 2026-10-12: va-zh-x2 / vb-zh-x2 / vb-jp-x2. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
   pdf:"Export PDF", md:"Export Markdown", edTitle:"Two editions", cmpTitle:"Intercept: HurricanePack vs. Black",
   ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin",hur:"Hurricane"}, lang:{zh:"Chinese build",jp:"Japanese build"}, icHp:"HurricanePack", icBlack:"Black",
   edTag:{base:"Chinese build · pure Black",hur:"Chinese or Japanese build · switchable Intercept",new:"Chinese or Japanese build · Black's Intercept",origin:"Chinese or Japanese build · 2004 Intercept"},
@@ -318,7 +318,7 @@ const UI = {
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
   sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-12 の x2 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
   dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日本語版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"現在の機能一覧（x2）", featSub:"2026-10-12 時点の最新版 va-zh-x1 / vb-zh-x2 / vb-jp-x2 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
+  featTitle:"現在の機能一覧（x2）", featSub:"2026-10-12 時点の最新版 va-zh-x2 / vb-zh-x2 / vb-jp-x2 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
   pdf:"PDF を出力", md:"Markdown を出力", edTitle:"2 つの版", cmpTitle:"交差の法：HurricanePack と Black の違い",
   ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin",hur:"ハリケーン版"}, lang:{zh:"中国語版",jp:"日本語版"}, icHp:"HurricanePack", icBlack:"Black",
   edTag:{base:"中国語版 · 『Black』そのまま",hur:"中国語版 / 日本語版 · 交差の法を切替",new:"中国語版 / 日本語版 · 『Black』の交差の法",origin:"中国語版 / 日本語版 · 初代の交差の法"},
@@ -369,9 +369,9 @@ const CMP = {
 
 /* kind: fix · new · zh · 360 · misc.  l: lines containing the change (B′/C′ inherit B/C unless only). */
 const RELEASES = [
- {date:"2026-10-12", latest:true, merged:true, flags:["new"], v:{B:"vb-zh-x2",C:"vb-jp-x2"},
+ {date:"2026-10-12", latest:true, merged:true, flags:["new"], v:{A:"va-zh-x2",B:"vb-zh-x2",C:"vb-jp-x2"},
   title:{zh:"x2 · 飓风版合并，交差之法可切换",en:"x2 · One Hurricane edition, switchable Intercept",ja:"x2 · ハリケーン版を統合、交差の法を切替式に"},
-  lead:{zh:"从这一版起飓风版不再分 new / origin：两种交差之法合并到同一个版本，在控制器设置中切换。基本版仍为 va-zh-x1，本次未更新。",en:"From this release the Hurricane edition is no longer split into new / origin: both Intercept sets are in one build and switched in Controller Settings. Basic stays at va-zh-x1 (not updated).",ja:"この版からハリケーン版を new／origin に分けず、2 種類の交差の法を 1 つの版にまとめてコントローラー設定で切り替えます。基本版は va-zh-x1 のまま（今回は更新なし）。"},
+  lead:{zh:"从这一版起飓风版不再分 new / origin：两种交差之法合并到同一个版本，在控制器设置中切换。基本版 va-zh-x2 只修了下面的按键提示。",en:"From this release the Hurricane edition is no longer split into new / origin: both Intercept sets are in one build and switched in Controller Settings. Basic va-zh-x2 only gets the button-hint fix below.",ja:"この版からハリケーン版を new／origin に分けず、2 種類の交差の法を 1 つの版にまとめてコントローラー設定で切り替えます。基本版 va-zh-x2 は下のボタン表示の修正のみ。"},
   items:[
    {k:"new",l:HUR,t:{zh:"<b>控制器设置新增「交差之法」</b>（第 4 行，原「弓箭准星」的位置）：<b>飓风包</b>（默认，= 原 origin 版：后退一段、接瞬间蓄力 Y 的窗口长、交差时手柄震动）/ <b>黑之章</b>（= 原 new 版：原地不动、特效更闪、窗口短、不震动）。改完回到游戏立即生效，正在交差时不会中途切换；「恢复默认设置」回到飓风包；设置随系统存档保存，旧系统存档为飓风包。",
      en:"<b>New Controller Settings row “Intercept”</b> (4th row, where Bow Crosshair was): <b>HurricanePack</b> (default, = the former origin: steps back, long window for the instant charge Y, rumbles) / <b>Black</b> (= the former new: stands firm, flashier, short window, no rumble). Applies as soon as you return to the game, never mid-Intercept; Default Settings returns to HurricanePack; stored in the system data (older system data: HurricanePack).",
@@ -379,7 +379,7 @@ const RELEASES = [
    {k:"misc",l:HUR,t:{zh:"<b>「弓箭准星」移到画面设置</b>，在「画面调整」之后；开 / 关不变，原来的设置保留。画面设置的「恢复默认设置」（宽屏模式才有）把准星恢复为「开」。",
      en:"<b>Bow Crosshair moved to Screen Settings</b>, right after Screen Adjustment; On/Off unchanged and kept. The Screen Settings Default Settings row (widescreen only) turns it back On.",
      ja:"<b>Bow Crosshair を画面設定へ移動</b>（Screen Adjustment の次）。On／Off と設定内容はそのまま。画面設定の Default Settings（ワイド画面時のみ）で On に戻ります。"}},
-   {k:"fix",l:HUR,t:{zh:"修正控制器设置的按键提示：x / x1 中光标停在「水中操作」时下方多显示「选择」（这一行只能左右切换），现在与其他可切换项一样只显示「返回」。",
+   {k:"fix",l:ALL,t:{zh:"修正控制器设置的按键提示：x / x1 中光标停在「水中操作」时下方多显示「选择」（这一行只能左右切换），现在与其他可切换项一样只显示「返回」。",
      en:"Controller Settings button hint fixed: in x / x1 the Controls While in Water row also showed “Select” (it only toggles left/right); it now shows only “Back” like the other option rows.",
      ja:"コントローラー設定のボタン表示を修正：x／x1 では Controls While in Water で「Select」が余分に表示されていました（左右で切り替えるだけの項目）。他の切替項目と同じく「Back」のみに。"}},
    {k:"misc",l:HUR,t:{zh:"标题画面右下角改为 <b>Hurricane</b>（去掉 new / origin）；版本名改为 vb-zh-x2 / vb-jp-x2。",en:"Title screen corner now reads <b>Hurricane</b> (no new / origin); versions are named vb-zh-x2 / vb-jp-x2.",ja:"タイトル画面右下を <b>Hurricane</b> に（new／origin を外しました）。バージョン名は vb-zh-x2／vb-jp-x2。"}},
