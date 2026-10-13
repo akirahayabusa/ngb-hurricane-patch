@@ -269,16 +269,16 @@ footer b,.qq{color:var(--bone)}
 /* ===== lines: A = 基本版 中文版 · B = 飓风new 中文版 · B2 = 飓风origin 中文版 · C = 飓风new 日文版 · C2 = 飓风origin 日文版 ===== */
 const ORDER = ["A","B","B2","C","C2"];
 const LINE = {A:{ed:"base",lang:"zh"},B:{ed:"new",lang:"zh"},B2:{ed:"origin",lang:"zh"},C:{ed:"new",lang:"jp"},C2:{ed:"origin",lang:"jp"}};
-const LATEST = {A:"va-zh-x2",B:"vb-zh-x2",C:"vb-jp-x2"};   /* x2: B′ / C′ merged into B / C (intercept is an option) */
+const LATEST = {A:"va-zh-x2",B:"vb-zh-x2.1",C:"vb-jp-x2.1"};   /* x2: B′ / C′ merged into B / C (intercept is an option) */
 const DL_URL = "https://pan.baidu.com/s/1Yo7rFdCPU0zYuuuAjZD6Vw?pwd=mjta#list/path=%2F&vmode=list", DL_CODE = "mjta";
 const DL_JP = "https://drive.google.com/drive/folders/1_dLaeVUC_-j2Cy5hyTBP-WC7xDmLABzl?usp=drive_link";
 const ALL="A B B2 C C2", ZH="A B B2", HUR="B B2 C C2", BZH="B B2";
 
 const UI = {
  zh:{ eyebrow:"NINJA GAIDEN BLACK · 更新日志", h1:"忍者龙剑传 <em>黑之章</em><br>汉化与飓风补丁 更新日志",
-  sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-12 的 x2，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
+  sub:"初代 Xbox《NINJA GAIDEN Black》简体中文汉化（以日文原文为底本）与飓风补丁。从 2026-09-25 的 v1 到 2026-10-13 的 x2.1，全部版本的改动按时间倒序列出，可按版本和语言筛选。",
   dlN:["下载方式一","下载方式二"], dlSub:"百度网盘 · 全部版本补丁合集", dlJpSub:"Google Drive · 日文版", dlCode:"百度网盘提取码", dlCopy:"复制百度网盘链接和提取码", dlBaidu:"百度网盘", dlDrive:"Google Drive",
-  featTitle:"当前功能一览（x2）", featSub:"截至 2026-10-12 最新版 va-zh-x2 / vb-zh-x2 / vb-jp-x2 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
+  featTitle:"当前功能一览（x2.1）", featSub:"截至 2026-10-13 最新版 va-zh-x2 / vb-zh-x2.1 / vb-jp-x2.1 的全部功能。✓ 有，— 无；日文版与中文版不同之处在格内注明。", featCol:"功能", issuesTitle:"已知问题",
   pdf:"导出 PDF", md:"导出 Markdown", edTitle:"两个版本", cmpTitle:"交差之法：飓风包 与 黑之章 有什么区别",
   ed:{base:"基本版",new:"飓风new",origin:"飓风origin",hur:"飓风版"}, lang:{zh:"中文版",jp:"日文版"}, icHp:"飓风包", icBlack:"黑之章",
   edTag:{base:"中文版 · 原汁原味黑之章",hur:"中文版 / 日文版 · 交差之法可切换",new:"中文版 / 日文版 · 黑之章交差之法",origin:"中文版 / 日文版 · 一代交差之法"},
@@ -296,9 +296,9 @@ const UI = {
   base:"已在 xemu、初代 Xbox 主机和 Xbox 360（向下兼容）上实测正常。所有版本都由同一张美版原版镜像打补丁生成（SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67）；同一语言的版本之间存档通用。版本号：va = 基本版，vb = 飓风版，zh = 中文版，jp = 日文版。",
   latestOf:"最新", vs:"对比项" },
  en:{ eyebrow:"NINJA GAIDEN BLACK · CHANGELOG", h1:"NINJA GAIDEN <em>Black</em><br>Chinese Translation &amp; Hurricane Patch Changelog",
-  sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x2 (2026-10-12), newest first, filterable by edition and language.",
+  sub:"A Simplified Chinese translation of the original Xbox NINJA GAIDEN Black (translated from the Japanese text) plus the Hurricane patch. Every change from v1 (2026-09-25) to x2.1 (2026-10-13), newest first, filterable by edition and language.",
   dlN:["Download option 1","Download option 2"], dlSub:"Baidu Netdisk · all editions", dlJpSub:"Google Drive · Japanese builds", dlCode:"Baidu Netdisk code", dlCopy:"Copy Baidu Netdisk link + code", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"Current features (x2)", featSub:"Everything in the latest builds as of 2026-10-12: va-zh-x2 / vb-zh-x2 / vb-jp-x2. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
+  featTitle:"Current features (x2.1)", featSub:"Everything in the latest builds as of 2026-10-13: va-zh-x2 / vb-zh-x2.1 / vb-jp-x2.1. ✓ yes, — no; where the Japanese build differs it is noted in the cell.", featCol:"Feature", issuesTitle:"Known issues",
   pdf:"Export PDF", md:"Export Markdown", edTitle:"Two editions", cmpTitle:"Intercept: Hurricane Pack vs. Black",
   ed:{base:"Basic",new:"Hurricane new",origin:"Hurricane origin",hur:"Hurricane"}, lang:{zh:"Chinese build",jp:"Japanese build"}, icHp:"Hurricane Pack", icBlack:"Black",
   edTag:{base:"Chinese build · pure Black",hur:"Chinese or Japanese build · switchable Intercept",new:"Chinese or Japanese build · Black's Intercept",origin:"Chinese or Japanese build · 2004 Intercept"},
@@ -316,9 +316,9 @@ const UI = {
   base:"Tested and working in xemu, on an original Xbox and on the Xbox 360 (backward compatibility). Every build is patched from the same US retail image (SHA-1 d35859d1f3a43ce793dbe3e914a5188f4e83ad67). Saves are shared between builds of the same language. Version names: va = Basic, vb = Hurricane, zh = Chinese build, jp = Japanese build.",
   latestOf:"latest", vs:"" },
  ja:{ eyebrow:"NINJA GAIDEN BLACK · 更新履歴", h1:"NINJA GAIDEN <em>Black</em><br>中国語化・ハリケーンパッチ 更新履歴",
-  sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-12 の x2 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
+  sub:"初代 Xbox『NINJA GAIDEN Black』の簡体字中国語化（日本語版の原文から翻訳）とハリケーンパッチ。2026-09-25 の v1 から 2026-10-13 の x2.1 まで、全バージョンの変更点を新しい順に掲載。版と言語で絞り込めます。",
   dlN:["ダウンロード方法 1","ダウンロード方法 2"], dlSub:"Baidu Netdisk · 全バージョン", dlJpSub:"Google Drive · 日本語版", dlCode:"Baidu Netdisk 抽出コード", dlCopy:"Baidu Netdisk のリンクとコードをコピー", dlBaidu:"Baidu Netdisk", dlDrive:"Google Drive",
-  featTitle:"現在の機能一覧（x2）", featSub:"2026-10-12 時点の最新版 va-zh-x2 / vb-zh-x2 / vb-jp-x2 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
+  featTitle:"現在の機能一覧（x2.1）", featSub:"2026-10-13 時点の最新版 va-zh-x2 / vb-zh-x2.1 / vb-jp-x2.1 の全機能。✓ あり、— なし。日本語版の違いはセル内に記載。", featCol:"機能", issuesTitle:"既知の問題",
   pdf:"PDF を出力", md:"Markdown を出力", edTitle:"2 つの版", cmpTitle:"交差の法：Hurricane Pack と Black の違い",
   ed:{base:"基本版",new:"ハリケーン new",origin:"ハリケーン origin",hur:"ハリケーン版"}, lang:{zh:"中国語版",jp:"日本語版"}, icHp:"Hurricane Pack", icBlack:"Black",
   edTag:{base:"中国語版 · 『Black』そのまま",hur:"中国語版 / 日本語版 · 交差の法を切替",new:"中国語版 / 日本語版 · 『Black』の交差の法",origin:"中国語版 / 日本語版 · 初代の交差の法"},
@@ -369,7 +369,16 @@ const CMP = {
 
 /* kind: fix · new · zh · 360 · misc.  l: lines containing the change (B′/C′ inherit B/C unless only). */
 const RELEASES = [
- {date:"2026-10-12", latest:true, merged:true, flags:["new"], v:{A:"va-zh-x2",B:"vb-zh-x2",C:"vb-jp-x2"},
+ {date:"2026-10-13", latest:true, merged:true, v:{B:"vb-zh-x2.1",C:"vb-jp-x2.1"},
+  title:{zh:"x2.1 · 4:3 画面下的准星开关修正",en:"x2.1 · Crosshair switch fixed on 4:3 screens",ja:"x2.1 · 4:3 画面での照準スイッチ修正"},
+  lead:{zh:"只修飓风版的一个问题，其余与 x2 相同，存档通用。基本版仍为 va-zh-x2。",en:"Fixes one Hurricane issue; otherwise identical to x2, saves compatible. Basic stays at va-zh-x2.",ja:"ハリケーン版の問題を 1 つ修正。そのほかは x2 と同じで、セーブデータも共通。基本版は va-zh-x2 のまま。"},
+  items:[
+   {k:"fix",l:HUR,t:{zh:"<b>修正老电视（4:3）画面模式下「弓箭准星」切换不了</b>（玩家反馈）：非宽屏的画面设置里准星一直显示「开」。原版这一页没有可改值的项目，x2 照抄原版代码时把“这一页禁止改值”的判断也带给了准星行；现在宽屏、非宽屏都能切换，「影片画面比例」仍按原版逻辑。",
+     en:"<b>Fixed Bow Crosshair being stuck On with a 4:3 (non-widescreen) display</b> (player report). The original page has no adjustable rows in 4:3, and x2 had copied that “no changes on this page” check into the crosshair row; it now toggles in both modes, while Movie Display Ratio keeps the original logic.",
+     ja:"<b>4:3（非ワイド）画面で Bow Crosshair が On のまま変えられない問題を修正</b>（ユーザー報告）。オリジナルのこのページには変更可能な項目がなく、x2 はその「このページでは変更しない」判定を照準の行にも写していました。ワイド・非ワイドどちらでも切り替え可能に（Movie Display Ratio はオリジナルどおり）。"}},
+   {k:"misc",l:HUR,t:{zh:"英文模式交差之法取值写作 “Hurricane Pack”，太长时像 “Controls While in Water” 一样横向压窄（x2 重发时已包含）。",en:"The Intercept value reads “Hurricane Pack” in English, squeezed horizontally like “Controls While in Water” when too long (already in the re-released x2).",ja:"Intercept の値は英語で “Hurricane Pack”。長い場合は “Controls While in Water” と同様に横へ縮めて表示（x2 再公開版から）。"}}
+  ]},
+ {date:"2026-10-12", merged:true, flags:["new"], v:{A:"va-zh-x2",B:"vb-zh-x2",C:"vb-jp-x2"},
   title:{zh:"x2 · 飓风版合并，交差之法可切换",en:"x2 · One Hurricane edition, switchable Intercept",ja:"x2 · ハリケーン版を統合、交差の法を切替式に"},
   lead:{zh:"从这一版起飓风版不再分 new / origin：两种交差之法合并到同一个版本，在控制器设置中切换。基本版 va-zh-x2 只修了下面的按键提示。",en:"From this release the Hurricane edition is no longer split into new / origin: both Intercept sets are in one build and switched in Controller Settings. Basic va-zh-x2 only gets the button-hint fix below.",ja:"この版からハリケーン版を new／origin に分けず、2 種類の交差の法を 1 つの版にまとめてコントローラー設定で切り替えます。基本版 va-zh-x2 は下のボタン表示の修正のみ。"},
   items:[
